@@ -157,4 +157,46 @@ The final piece of the project was to automate the multi-step upload wizard in B
 - The application successfully scrapes folders from Vortex.
 - It downloads leads from a selected folder, transforms the data into a Boldtrail-compatible format, and saves it to a new CSV.
 - It then logs into Boldtrail and navigates the entire bulk import wizard, uploading the generated CSV and applying the correct tag.
-- The project is complete and meets all requirements outlined in the initial build guide and PRD. 
+- The project is complete and meets all requirements outlined in the initial build guide and PRD.
+
+## 9. Refactoring for Reusability
+
+To accommodate the new "Expireds" migration feature without duplicating code, a significant refactoring was undertaken.
+- **Shared Logic Identified**: The CSV transformation and Boldtrail upload functions were nearly identical for both the folder-based migration and the planned expireds migration.
+- **Utility Module Created**: A new file, `backend/playwright/boldtrail_utils.py`, was created.
+- **Functions Moved**: The `transform_vortex_to_boldtrail_csv` and `upload_csv_to_boldtrail` functions were moved from `migration_runner.py` into `boldtrail_utils.py`. The `folder_name` parameter was generalized to `source_name` to handle both folders and filters.
+- **Scripts Updated**: Both `migration_runner.py` and the new `expired_scraper.py` were updated to import and use these shared functions, resulting in a cleaner, more maintainable codebase.
+
+## 10. New Feature: Expireds Migration
+
+A major new feature was added to allow for a one-click migration of leads from a predefined filter.
+- **Frontend Button**: A new "Migrate Latest Expireds (Bristol County, MA)" button was added to the UI in `frontend/src/app/page.tsx`.
+- **API Endpoint**: A new API route, `/api/migrate-expireds`, was created in `backend/app.py`.
+- **New Scraper Script**: A new Playwright script, `backend/playwright/expired_scraper.py`, was created to:
+    1. Log into Vortex.
+    2. Click the "Daily Expireds" filter in the sidebar.
+    3. Follow the same "Select All" -> "More" -> "Export" flow to download the CSV.
+    4. Call the shared utility functions from `boldtrail_utils.py` to transform the CSV and upload it to Boldtrail.
+
+## 11. Agent Notes Enhancement
+
+Based on user feedback, the format of the `agent_notes` field in the final Boldtrail upload was significantly improved.
+- **Previous Format**: A short, static paragraph summarizing a few key fields.
+- **New Format**: A dynamic, comprehensive, and clean-looking list. The new `transform_vortex_to_boldtrail_csv` function now iterates through *all* columns of the source Vortex CSV. For any column with a non-empty value, it generates a bullet-pointed line (e.g., `* roof type: asphalt`) in the note.
+- **Universal Application**: Because this logic is in the shared `boldtrail_utils.py` file, this enhancement applies to both folder-based and expireds-based migrations automatically.
+
+## 12. Debugging and Finalization
+
+The final phase involved iterative debugging and hardening of the automation scripts to ensure reliability.
+- **Login Unification**: Fixed a login failure in the new expireds scraper by standardizing the login method across all scripts (`migration_runner.py`, `expired_scraper.py`) to use the more robust keyboard-based navigation (`Tab`, `Tab`, `Enter`).
+- **Browser Maximization**: Ensured all Playwright instances launch with a maximized browser window (`--start-maximized` and `no_viewport=True`) to prevent responsive UI elements from hiding and causing selector failures.
+- **Folder Selection Logic**: Resolved a critical timeout in the folder migration script. The fix involved aligning the `migration_runner.py`'s folder-finding logic to perfectly match the `folder_scraper.py`'s logic, first by locating the "MY FOLDERS" `span` and then finding the specific folder `div` within that container. An explicit `scroll_into_view_if_needed()` call was also added to handle long folder lists.
+- **Strategic Pauses**: Added brief, 1-second `wait_for_timeout` calls after critical UI interactions (like clicking a folder and selecting all leads) to give the web application's UI time to react and update, increasing script stability.
+
+## 13. Project Archival
+
+The project was finalized by preparing it for version control.
+- **`.gitignore` Created**: A comprehensive `.gitignore` file was added to the project root to exclude credentials, virtual environments, cache files, and OS-specific files.
+- **`.env.example` Created**: An example environment file was created to serve as a template for future users.
+- **`README.md` Created**: A detailed README was written, providing a project overview, feature list, and step-by-step setup and run instructions.
+- **GitHub Commit**: The entire project was successfully committed to a new GitHub repository, marking the completion of the development cycle. 

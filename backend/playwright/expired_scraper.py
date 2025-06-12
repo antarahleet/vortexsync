@@ -12,90 +12,94 @@ SOURCE_NAME = "Daily Expireds" # Define the source for logging and notes
 def run_expired_migration():
     """
     Orchestrates the migration of 'Daily Expireds' from Vortex to Boldtrail.
+    Yields log messages as it progresses.
     """
-    print(f"Starting migration for: {SOURCE_NAME}")
+    yield f"Starting migration for: {SOURCE_NAME}"
     load_dotenv()
     DOWNLOAD_DIR.mkdir(exist_ok=True)
     
+    page = None
+    context = None
+    browser = None
+    playwright = None
+
     try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False, args=["--start-maximized"])
-            context = browser.new_context(accept_downloads=True, no_viewport=True)
-            page = context.new_page()
+        playwright = sync_playwright().start()
+        browser = playwright.chromium.launch(headless=False, args=["--start-maximized"])
+        context = browser.new_context(accept_downloads=True, no_viewport=True)
+        page = context.new_page()
 
-            # --- Part 1: Download from Vortex ---
-            print("Navigating to Vortex login page...")
-            page.goto(VORTEX_LOGIN_URL, timeout=60000)
-            
-            print("Entering credentials and logging in...")
-            page.wait_for_timeout(1000) # Wait for page to settle
-            page.keyboard.press("Tab")
-            page.keyboard.type(os.getenv("VORTEX_USER"))
-            page.keyboard.press("Tab")
-            page.keyboard.type(os.getenv("VORTEX_PASS"))
-            page.keyboard.press("Enter")
+        # --- Part 1: Download from Vortex ---
+        yield "Navigating to Vortex login page..."
+        page.goto(VORTEX_LOGIN_URL, timeout=60000)
+        
+        yield "Entering credentials and logging in..."
+        page.wait_for_timeout(1000) 
+        page.keyboard.press("Tab")
+        page.keyboard.type(os.getenv("VORTEX_USER"))
+        page.keyboard.press("Tab")
+        page.keyboard.type(os.getenv("VORTEX_PASS"))
+        page.keyboard.press("Enter")
 
-            print("Waiting for dashboard to load...")
-            page.wait_for_selector("text=MY FOLDERS", timeout=60000)
-            print("Dashboard loaded successfully.")
+        yield "Waiting for dashboard to load..."
+        page.wait_for_selector("text=MY FOLDERS", timeout=60000)
+        yield "Dashboard loaded successfully."
 
-            print(f"Searching for and clicking on filter: '{SOURCE_NAME}'...")
-            expired_filter_selector = f"div.folder-item-text:has-text('{SOURCE_NAME}')"
-            page.locator(expired_filter_selector).click()
-            print(f"Clicked filter: '{SOURCE_NAME}'.")
-            page.wait_for_timeout(1000) # Pause for 1 second as requested
+        yield f"Searching for and clicking on filter: '{SOURCE_NAME}'..."
+        expired_filter_selector = f"div.folder-item-text:has-text('{SOURCE_NAME}')"
+        page.locator(expired_filter_selector).click()
+        yield f"Clicked filter: '{SOURCE_NAME}'."
+        page.wait_for_timeout(1000)
 
-            print("Waiting for and clicking 'Select All' checkbox...")
-            select_all_checkbox = page.locator("#vxtb-button-check")
-            select_all_checkbox.wait_for(state="visible", timeout=30000)
-            select_all_checkbox.click()
-            print("Clicked 'Select All'.")
-            page.wait_for_timeout(1000) # Pause for 1 second as requested
+        yield "Waiting for and clicking 'Select All' checkbox..."
+        select_all_checkbox = page.locator("#vxtb-button-check")
+        select_all_checkbox.wait_for(state="visible", timeout=30000)
+        select_all_checkbox.click()
+        yield "Clicked 'Select All'."
+        page.wait_for_timeout(1000)
 
-            print("Waiting for and clicking 'More' button...")
-            more_button = page.locator('div.top-navbar__more-button:has-text("More")')
-            more_button.wait_for(state="visible", timeout=30000)
-            more_button.click()
-            print("Clicked 'More' button.")
+        yield "Waiting for and clicking 'More' button..."
+        more_button = page.locator('div.top-navbar__more-button:has-text("More")')
+        more_button.wait_for(state="visible", timeout=30000)
+        more_button.click()
+        yield "Clicked 'More' button."
 
-            print("Waiting for and clicking 'Export' button...")
-            export_button = page.locator('li[export-leads="export-leads"]')
-            
-            vortex_csv_filename = "daily_expireds.csv"
-            vortex_csv_path = DOWNLOAD_DIR / vortex_csv_filename
+        yield "Waiting for and clicking 'Export' button..."
+        export_button = page.locator('li[export-leads="export-leads"]')
+        
+        vortex_csv_filename = "daily_expireds.csv"
+        vortex_csv_path = DOWNLOAD_DIR / vortex_csv_filename
 
-            with page.expect_download() as download_info:
-                export_button.click()
-            download = download_info.value
-            download.save_as(vortex_csv_path)
-            
-            print(f"SUCCESS: File downloaded to {vortex_csv_path}")
-            log("vortex_csv_downloaded", {"source": SOURCE_NAME, "path": str(vortex_csv_path)})
+        with page.expect_download() as download_info:
+            export_button.click()
+        download = download_info.value
+        download.save_as(vortex_csv_path)
+        
+        yield f"SUCCESS: File downloaded to {vortex_csv_path}"
+        log("vortex_csv_downloaded", {"source": SOURCE_NAME, "path": str(vortex_csv_path)})
 
-            # --- Part 2: Transform CSV ---
-            transform_result = transform_vortex_to_boldtrail_csv(vortex_csv_path, SOURCE_NAME)
-            if transform_result["status"] == "error":
-                raise Exception(transform_result["message"])
+        # --- Part 2: Transform CSV ---
+        for message in transform_vortex_to_boldtrail_csv(vortex_csv_path, SOURCE_NAME):
+            if "boldtrail_csv_path" in message:
+                boldtrail_csv_path = message["boldtrail_csv_path"]
+            else:
+                yield message
 
-            boldtrail_csv_path = pathlib.Path(transform_result["boldtrail_csv_path"])
-
-            # --- Part 3: Upload to Boldtrail ---
-            upload_result = upload_csv_to_boldtrail(page, boldtrail_csv_path, SOURCE_NAME)
-            if upload_result["status"] == "error":
-                raise Exception(upload_result["message"])
-
-            print("Closing browser context.")
-            context.close()
-            browser.close()
-            return upload_result
+        # --- Part 3: Upload to Boldtrail ---
+        for message in upload_csv_to_boldtrail(page, boldtrail_csv_path, SOURCE_NAME):
+            yield message
 
     except PlaywrightTimeoutError as e:
         error_message = f"Timeout error during migration for '{SOURCE_NAME}': {e}"
-        print(f"ERROR: {error_message}")
+        yield f"ERROR: {error_message}"
         log("migration_error", {"source": SOURCE_NAME, "error": str(e)})
-        return {"status": "error", "message": error_message}
     except Exception as e:
         error_message = f"An unexpected error occurred during migration for '{SOURCE_NAME}': {e}"
-        print(f"ERROR: {error_message}")
+        yield f"ERROR: {error_message}"
         log("migration_error", {"source": SOURCE_NAME, "error": str(e)})
-        return {"status": "error", "message": error_message} 
+    finally:
+        yield "Migration process finished. Closing resources."
+        if page: page.close()
+        if context: context.close()
+        if browser: browser.close()
+        if playwright: playwright.stop() 

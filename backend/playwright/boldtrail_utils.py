@@ -8,23 +8,20 @@ import re
 DOWNLOAD_DIR = pathlib.Path(__file__).resolve().parent.parent / "cache" / "downloads"
 BOLDTRAIL_LOGIN_URL = "https://app.boldtrail.com/login"
 
-def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name: str) -> dict:
+def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name: str):
     """
-    Reads a Vortex CSV, transforms it to the Boldtrail bulk import format,
-    and saves it as a new CSV file. 'source_name' can be a folder or a filter name.
+    Reads a Vortex CSV, transforms it, and saves it. Yields progress messages.
     """
-    print("\n--- Transforming CSV for Boldtrail Upload ---")
+    yield "--- Transforming CSV for Boldtrail Upload ---"
     try:
         vortex_df = pd.read_csv(vortex_csv_path, dtype=str).fillna('')
-        print(f"Read {len(vortex_df)} leads from {vortex_csv_path}")
+        yield f"Read {len(vortex_df)} leads from {vortex_csv_path}"
     except FileNotFoundError:
-        message = f"Downloaded Vortex CSV not found at {vortex_csv_path}"
-        print(f"ERROR: {message}")
-        return {"status": "error", "message": message}
+        yield f"ERROR: Downloaded Vortex CSV not found at {vortex_csv_path}"
+        return
     except Exception as e:
-        message = f"Error reading Vortex CSV: {e}"
-        print(f"ERROR: {message}")
-        return {"status": "error", "message": message}
+        yield f"ERROR: Error reading Vortex CSV: {e}"
+        return
 
     boldtrail_leads = []
     
@@ -87,24 +84,19 @@ def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name
     boldtrail_csv_path = DOWNLOAD_DIR / "boldtrail_upload.csv"
     boldtrail_df.to_csv(boldtrail_csv_path, index=False)
     
-    print(f"SUCCESS: Transformed CSV created at {boldtrail_csv_path}")
+    yield f"SUCCESS: Transformed CSV created at {boldtrail_csv_path}"
     log("csv_transformed", {"source": source_name, "output_path": str(boldtrail_csv_path), "lead_count": len(boldtrail_df)})
-    
-    return {
-        "status": "success", 
-        "message": f"Transformed CSV for {source_name} created with {len(boldtrail_df)} leads.", 
-        "boldtrail_csv_path": str(boldtrail_csv_path)
-    }
+    yield {"boldtrail_csv_path": boldtrail_csv_path} # Yield path separately
 
 def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source_name: str):
     """
-    Logs into Boldtrail and uploads the transformed CSV for bulk import.
+    Logs into Boldtrail and uploads the CSV. Yields progress messages.
     """
-    print("\n--- Starting Boldtrail CSV Upload ---")
+    yield "--- Starting Boldtrail CSV Upload ---"
     
-    print("Navigating to Boldtrail login page...")
+    yield "Navigating to Boldtrail login page..."
     page.goto(BOLDTRAIL_LOGIN_URL, timeout=60000)
-    print("Entering Boldtrail credentials via keyboard...")
+    yield "Entering Boldtrail credentials via keyboard..."
     page.wait_for_timeout(1000)
     page.keyboard.press("Tab")
     page.keyboard.type(os.getenv("BOLDTRAIL_USER"))
@@ -114,52 +106,48 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     page.keyboard.type(os.getenv("BOLDTRAIL_PASS"))
     page.keyboard.press("Enter")
     
-    print("Waiting for dashboard to load and finding Lead Engine button...")
+    yield "Waiting for dashboard to load and finding Lead Engine button..."
     lead_engine_selector = "div.side-menu-item-content:has-text('LeadEngine')"
     page.wait_for_selector(lead_engine_selector, timeout=60000)
-    print("Logged into Boldtrail and found Lead Engine button.")
+    yield "Logged into Boldtrail and found Lead Engine button."
 
     page.locator(lead_engine_selector).click()
     
-    print("Clicking 'Start an Import'...")
+    yield "Clicking 'Start an Import'..."
     start_import_selector = "button:has-text('Start an Import')"
     page.wait_for_selector(start_import_selector, timeout=30000)
     page.locator(start_import_selector).click()
 
-    print("Waiting for bulk import page and clicking 'Get Started'...")
+    yield "Waiting for bulk import page and clicking 'Get Started'..."
     page.wait_for_url("**/bulk-import", timeout=30000)
     get_started_selector = "button[data-userpilot='do-it-yourself-get-started-button']"
     page.wait_for_selector(get_started_selector, timeout=30000)
     page.locator(get_started_selector).click()
 
-    # 3. Upload the file
-    print("Waiting for file upload page to load...")
-    # Add a static pause to allow the page to transition reliably.
+    yield "Waiting for file upload page to load..."
     page.wait_for_timeout(2500) 
 
-    print(f"Uploading {boldtrail_csv_path}...")
+    yield f"Uploading {boldtrail_csv_path}..."
     file_input_selector = "input[type='file']" 
-    # Wait for the file input to be attached to the DOM, not necessarily visible.
     page.wait_for_selector(file_input_selector, state='attached', timeout=30000)
     page.set_input_files(file_input_selector, boldtrail_csv_path)
 
-    # 4. Handle Preview and Confirmation
-    print("File selected. Handling preview page...")
+    yield "File selected. Handling preview page..."
     
     terms_checkbox_selector = "input.base-input"
     page.wait_for_selector(terms_checkbox_selector, timeout=10000)
     page.locator(terms_checkbox_selector).check()
-    print("Checked 'I understand' box.")
+    yield "Checked 'I understand' box."
 
     next_button_selector = "button.next-btn:has-text('Next')"
     page.locator(next_button_selector).click()
-    print("Clicked 'Next' button on preview page.")
+    yield "Clicked 'Next' button on preview page."
 
-    print("Handling final import page...")
+    yield "Handling final import page..."
     
     page.wait_for_selector(next_button_selector, timeout=10000)
     page.locator(next_button_selector).click()
-    print("Clicked 'Next' button on routing page.")
+    yield "Clicked 'Next' button on routing page."
 
     hashtag_input_selector = "input[placeholder='Search For Hashtags']"
     page.wait_for_selector(hashtag_input_selector, timeout=10000)
@@ -167,15 +155,15 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     hashtag_input.click()
     hashtag_input.type("vortexsync")
     hashtag_input.press("Enter")
-    print("Added 'vortexsync' hashtag.")
+    yield "Added 'vortexsync' hashtag."
 
     # Final Submission
     finish_button_selector = "button.next-btn:has-text('Finish')"
-    print("Clicking the final 'Finish' button...")
+    yield "Clicking the final 'Finish' button..."
     page.locator(finish_button_selector).click()
     
     page.wait_for_timeout(5000)
-    print("Import process appears to be complete.")
+    yield "Import process appears to be complete."
 
     log("csv_upload_complete", {"source": source_name, "status": "success"})
     

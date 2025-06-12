@@ -24,41 +24,37 @@ Agents currently export seller‐lead folders from **Vortex** and manually enter
 * **US‑01**: As an agent, I can **refresh** the list of Vortex folders so I always see the latest folders.  
 * **US‑02**: As an agent, I can **select a folder** from a searchable dropdown.  
 * **US‑03**: As an agent, I can **preview** the number of leads before running migration.  
-* **US‑04**: As an agent, I can **start migration** and watch real‑time progress and error logs.  
-* **US‑05**: As an agent, I receive a **summary report** when the migration finishes.  
+* **US‑04**: As an agent, I can **start migration** for a specific folder and see its status.  
+* **US‑05**: As an agent, I can trigger a **separate migration for all recent "Daily Expireds"** with a single click.  
+* **US‑06**: As an agent, I receive a **summary report** in the UI when a migration finishes.  
 
 ## 6. Functional Requirements
 ### 6.1 Folder Retrieval
-* **FR‑1**: System logs into Vortex with stored credentials.  
+* **FR‑1**: System logs into Vortex with stored credentials from an `.env` file.  
 * **FR‑2**: Scrape all **parent folders** (+ subfolders if present) from the sidebar.  
 * **FR‑3**: Cache folder list in JSON or DB.  
 * **FR‑4**: Expose `GET /api/folders` (returns cached list) and `POST /api/update-folders` (refreshes cache).
 
-### 6.2 Lead Migration
-* **FR‑5**: Given a folder name, navigate to that folder and click **Download CSV**.  
-* **FR‑6**: Save CSV to `/tmp`, parse each row.  
-* **FR‑7**: For every lead row:
-  * Extract names, phones, emails, address, property & tax details.  
-  * Generate a descriptive paragraph **including the folder name**.  
-  * Log into Boldtrail, click **Add Contact**.  
-  * Populate fields:
-    * *First/Last Name* – first contact on record  
-    * *Email / Phone(s)* – primary + secondary  
-    * *Address* – street, city, state, zip  
-    * *Contact permissions* – enable call, text, email  
-    * *Lead Type* – Seller  
-    * *Lead Status* – New Lead  
-    * *Lead Source* – VORTEX  
-    * *Note* – generated paragraph with folder name  
-  * Submit form.
-* **FR‑8**: Record success/failure per lead in run log.
+### 6.2 Lead Migration (Bulk CSV Method)
+* **FR‑5**: Given a folder name OR a predefined filter (e.g., "Daily Expireds"), navigate to the corresponding page in Vortex.
+* **FR‑6**: Programmatically select all leads and trigger the "Export" function to download a CSV of the lead data.
+* **FR‑7**: Save the downloaded CSV to a local cache directory.
+* **FR‑8**: Transform the Vortex CSV into a new, Boldtrail-compatible CSV. This includes:
+    * Splitting the `Name` field into `first_name` and `last_name`.
+    * Finding the first available phone number and cleaning it to be purely numeric.
+    * Mapping all relevant address fields.
+    * **Generating a comprehensive, bulleted list of all non-empty fields from the source CSV to be used as the `agent_notes` in Boldtrail.** The source folder/filter is included at the top of this note.
+* **FR‑9**: Log into Boldtrail using stored credentials.
+* **FR‑10**: Navigate to the "Lead Engine" -> "Bulk Import" tool.
+* **FR‑11**: Automate the multi-step import wizard to upload the transformed CSV, accept terms, and apply a `vortexsync` tag to the import.
 
 ### 6.3 Web UI
-* **FR‑9**: Secure login (basic auth or Supabase magic link).  
-* **FR‑10**: Dropdown populated via `/api/folders` with search filter.  
-* **FR‑11**: "Update Vortex Folders" button triggers `/api/update-folders`.  
-* **FR‑12**: "Start Migration" button posts to `/api/run-migration` with selected folder.  
-* **FR‑13**: Display real‑time logs and final summary.
+* **FR‑12**: No user login required for the local tool.
+* **FR‑13**: Main page displays a dropdown populated via `/api/folders`.
+* **FR‑14**: "Update Vortex Folders" button triggers `/api/update-folders` and provides interactive progress/success feedback.
+* **FR‑15**: "Start Migration" button posts to `/api/run-migration` with the selected folder.
+* **FR‑16**: A separate "Migrate Latest Expireds" button posts to `/api/migrate-expireds`.
+* **FR‑17**: The UI displays real-time status messages for all operations.
 
 ## 7. Non‑Functional Requirements
 | Category | Requirement |
@@ -69,6 +65,7 @@ Agents currently export seller‐lead folders from **Vortex** and manually enter
 | **Security** | Credentials in env vars; TLS enforced; no CSV persisted after run |
 | **Logging** | JSON log per run; errors emailed/slacked to admin |
 | **Maintainability** | Modular codebase with automated tests |
+| **Cache**: Local JSON files in `/backend/cache/`.
 
 ## 8. Technical Architecture
 ```
@@ -86,8 +83,8 @@ Agents currently export seller‐lead folders from **Vortex** and manually enter
 
 ## 9. Constraints & Assumptions
 * Vortex DOM remains stable (no major redesign).  
-* Boldtrail *Add Contact* has no CAPTCHA and loads < 5 s.  
-* CSV contains all necessary lead data.  
+* Boldtrail's bulk import wizard flow remains stable.  
+* CSV format from Vortex contains all necessary lead data.  
 * English locale only.
 
 ## 10. Out‑of‑Scope (Phase 1)
