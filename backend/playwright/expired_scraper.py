@@ -120,6 +120,7 @@ if __name__ == "__main__":
     import re
     import traceback
     import multiprocessing
+    import pandas as pd
 
     # Load .env file for local execution and for production secrets
     load_dotenv()
@@ -162,19 +163,34 @@ if __name__ == "__main__":
 
     # --- Email Reporting ---
     print("VortexSync: Preparing email report...")
+
+    # --- New: Read the output CSV for lead names/count ---
+    boldtrail_csv_path = DOWNLOAD_DIR / "boldtrail_upload.csv"
+    lead_names = []
+    if boldtrail_csv_path.exists():
+        try:
+            df = pd.read_csv(boldtrail_csv_path)
+            lead_names = (df['first_name'].fillna('') + ' ' + df['last_name'].fillna('')).tolist()
+            lead_names = [name.strip() for name in lead_names if name.strip()]
+            lead_count = len(lead_names)
+        except Exception as e:
+            print(f"Could not read boldtrail_upload.csv: {e}")
+
     if success:
         subject = f"✅ VortexSync Success: {lead_count} Expired Leads Migrated"
         body = (
             f"The daily Vortex -> Boldtrail migration for 'Daily Expireds' completed successfully.\n\n"
-            f"Leads Uploaded: {lead_count}\n\n"
-            f"Have a great day!"
+            f"We attempted to migrate {lead_count} leads!\n\n"
+            f"Lead names:\n" + ("\n".join(lead_names) if lead_names else "(No leads found)") +
+            "\n\nHave a great day!"
         )
     else:
         subject = "❌ VortexSync FAILURE: Daily Expireds Migration Failed"
         body = (
             f"The daily Vortex -> Boldtrail migration for 'Daily Expireds' failed.\n\n"
-            f"Leads Processed Before Failure: {lead_count}\n\n"
-            f"--- ERROR ---\n{error_info}\n\n"
+            f"We attempted to migrate {lead_count} leads!\n\n"
+            f"Lead names:\n" + ("\n".join(lead_names) if lead_names else "(No leads found)") +
+            f"\n\n--- ERROR ---\n{error_info}\n\n"
             f"--- FULL LOGS ---\n" + "\n".join(log_messages)
         )
 
