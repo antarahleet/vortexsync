@@ -200,3 +200,55 @@ The project was finalized by preparing it for version control.
 - **`.env.example` Created**: An example environment file was created to serve as a template for future users.
 - **`README.md` Created**: A detailed README was written, providing a project overview, feature list, and step-by-step setup and run instructions.
 - **GitHub Commit**: The entire project was successfully committed to a new GitHub repository, marking the completion of the development cycle. 
+
+## 14. Real-time Progress View
+
+To provide a better user experience, the final feature implemented was a real-time progress log that mimics a CLI interface. This required a significant refactoring of the backend-frontend communication.
+
+- **Backend Refactoring (Generators & Streaming)**:
+    - All core Playwright functions (`run_migration`, `run_expired_migration`, and the utilities in `boldtrail_utils.py`) were converted from standard functions into **generator functions**. Instead of `print()`ing their status, they now `yield` each log message as it occurs.
+    - A new `stream_wrapper` decorator was created in `app.py` to handle these generators. It wraps the generator's output in a streaming `Response` using the **Server-Sent Events (SSE)** protocol (`mimetype='text/event-stream'`).
+    - The API endpoints (`/api/run-migration`, `/api/migrate-expireds`) were updated to use this streaming response mechanism.
+
+- **Frontend Implementation (CLI Display & EventSource)**:
+    - The main UI in `frontend/src/app/page.tsx` was overhauled to include a new state, `isMigrating`, which conditionally renders a "CLI" display.
+    - This display is a styled `div` with a dark background and monospaced, green/yellow text, which automatically scrolls to the bottom as new messages arrive.
+    - A `startStream` function was created that uses the browser's `fetch` API to make a `POST` request to the backend. It then reads the resulting response body as a stream.
+    - As data chunks arrive, they are decoded, parsed as Server-Sent Events, and appended to a `logMessages` state array, causing the CLI display to update in real-time.
+    - When the backend sends a special `__DONE__` message, the stream is closed, and the user is presented with a button to close the log and return to the main view.
+
+- **Final Commit**: All changes for the real-time logging feature were committed and pushed to the GitHub repository, completing the project's feature set.
+
+## 15. Deployment Troubleshooting
+
+The deployment process to Fly.io encountered an issue where the `fly` CLI command, after initially working, suddenly became unrecognized by PowerShell (`The term 'fly' is not recognized...`).
+
+- **Diagnosis**: This was identified as a `PATH` environment variable issue. The installer had updated the system's PATH, but the change had not been picked up by the active terminal session. Restarting the terminal did not resolve the issue immediately.
+- **Solution**: The problem was bypassed by using the full, absolute path to the executable (`C:\Users\antar\.fly\bin\flyctl.exe`) for all subsequent CLI calls. This ensures the command is found regardless of the shell's current `PATH` configuration.
+
+## 16. Deployment and Troubleshooting on Fly.io
+
+The deployment process involved a lengthy and iterative debugging cycle to resolve several issues that only appeared in the production environment.
+
+1.  **Initial `ModuleNotFoundError`**: The first deployment failed because the Python script couldn't find the `backend` module.
+    -   **Incorrect Fix #1**: `ENV PYTHONPATH=/app` and `python -m` were added to the Dockerfile. This did not work as it created a different path context issue.
+    -   **Incorrect Fix #2**: A `sys.path.append()` call was added to the script. This also failed to resolve the issue.
+    -   **Correct Fix**: The root cause was identified as an unused `from backend.utils.logger import log` statement in both `expired_scraper.py` and its dependency, `boldtrail_utils.py`. Removing this legacy import resolved the module loading crash.
+
+2.  **Fly.io App Suspension**: The application was being suspended after 10 failed health checks.
+    -   **Diagnosis**: The `fly.toml` was configured with an `[http_service]`, causing Fly.io to treat the script as a web server and ping it. Since the script does not listen on a port, the health checks failed.
+    -   **Correct Fix**: The `[http_service]` and `[[vm]]` sections were removed from `fly.toml`, correctly defining the application as a simple, non-web task.
+
+3.  **SMTP Authentication Failure**: The switch to Gmail for email reporting initially failed.
+    -   **Diagnosis**: The initial error with Outlook was due to Microsoft disabling Basic Authentication. After switching to Gmail, a `KeyError: 'SMTP_USER'` appeared in the logs.
+    -   **Correct Fix**: A single line in `email_reporter.py` was still referencing the old `os.environ["SMTP_USER"]` variable instead of the new `EMAIL_USER`. Correcting this line fixed the authentication logic.
+
+4.  **Playwright Headless Mode Crash**: After fixing the code issues, the Playwright browser began crashing inside the container.
+    -   **Diagnosis**: Logs showed the script was trying to launch a "headed" browser in a headless Linux environment. Several attempts to fix this by conditionally setting `headless=True` or defining a `viewport` were unsuccessful due to conflicting arguments.
+    -   **Correct Fix**: The final solution was to remove all conditional logic and conflicting arguments (`no_viewport=True`) and simply force `headless=True` while setting a large, fixed viewport size (`{'width': 1920, 'height': 1080}`).
+
+5.  **Build Cache Issue**: The final logic bug (incorrectly reporting success as failure) was not being reflected in the deployment.
+    -   **Diagnosis**: The Fly.io build process was likely using a cached Docker layer that contained the old, buggy version of the script.
+    -   **Correct Fix**: The final deployment was run with the `--no-cache` flag to force a complete rebuild, ensuring the latest version of all files was used.
+
+After resolving all of these issues, the application was deployed successfully, the migration ran, and a correct success email was sent. 

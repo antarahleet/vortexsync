@@ -24,9 +24,9 @@ Agents currently export seller‐lead folders from **Vortex** and manually enter
 * **US‑01**: As an agent, I can **refresh** the list of Vortex folders so I always see the latest folders.  
 * **US‑02**: As an agent, I can **select a folder** from a searchable dropdown.  
 * **US‑03**: As an agent, I can **preview** the number of leads before running migration.  
-* **US‑04**: As an agent, I can **start migration** for a specific folder and see its status.  
+* **US‑04**: As an agent, I can **start migration** for a specific folder and see its real-time progress.  
 * **US‑05**: As an agent, I can trigger a **separate migration for all recent "Daily Expireds"** with a single click.  
-* **US‑06**: As an agent, I receive a **summary report** in the UI when a migration finishes.  
+* **US‑06**: As an agent, I can see a **complete, real-time log** in the UI as the migration runs.  
 
 ## 6. Functional Requirements
 ### 6.1 Folder Retrieval
@@ -54,7 +54,7 @@ Agents currently export seller‐lead folders from **Vortex** and manually enter
 * **FR‑14**: "Update Vortex Folders" button triggers `/api/update-folders` and provides interactive progress/success feedback.
 * **FR‑15**: "Start Migration" button posts to `/api/run-migration` with the selected folder.
 * **FR‑16**: A separate "Migrate Latest Expireds" button posts to `/api/migrate-expireds`.
-* **FR‑17**: The UI displays real-time status messages for all operations.
+* **FR‑17**: The UI displays a live, streaming log of real-time status messages from the backend for all migration operations.
 
 ## 7. Non‑Functional Requirements
 | Category | Requirement |

@@ -85,7 +85,6 @@ def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name
     boldtrail_df.to_csv(boldtrail_csv_path, index=False)
     
     yield f"SUCCESS: Transformed CSV created at {boldtrail_csv_path}"
-    log("csv_transformed", {"source": source_name, "output_path": str(boldtrail_csv_path), "lead_count": len(boldtrail_df)})
     yield {"boldtrail_csv_path": boldtrail_csv_path} # Yield path separately
 
 def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source_name: str):
@@ -165,6 +164,4 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     page.wait_for_timeout(5000)
     yield "Import process appears to be complete."
 
-    log("csv_upload_complete", {"source": source_name, "status": "success"})
-    
     return {"status": "success", "message": f"Migration for {source_name} completed successfully."} 
