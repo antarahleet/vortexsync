@@ -2,9 +2,9 @@ name: Daily Vortex Migration
 
 on:
   schedule:
-    # Runs at 8:30 AM UTC every day.
+    # Runs at 8:30 AM ET (12:30 UTC) every day.
     # Note: GitHub Actions can sometimes be delayed by 5-15 minutes.
-    - cron: '30 8 * * *'
+    - cron: '30 12 * * *'
   workflow_dispatch:
     # This line adds a "Run workflow" button to the Actions tab
     # in GitHub, so you can trigger it manually for testing.
