@@ -15,6 +15,10 @@ def run_expired_migration():
     Orchestrates the migration of 'Daily Expireds' from Vortex to Boldtrail.
     Yields log messages as it progresses.
     """
+    playwright = None
+    browser = None
+    context = None
+    page = None
     # Check if running in the Fly.io environment
     is_production = 'FLY_APP_NAME' in os.environ
     
@@ -22,7 +26,7 @@ def run_expired_migration():
     try:
         yield "Starting migration for: Daily Expireds"
         load_dotenv()
-        DOWNLOAD_DIR.mkdir(exist_ok=True)
+        DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
         
         playwright = sync_playwright().start()
         
