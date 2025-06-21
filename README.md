@@ -1,82 +1,88 @@
-# VortexSync Lead Migration Tool
+# VortexSync: Automated Real Estate Lead Migration
 
-VortexSync is a full-stack web application designed to automate the migration of real estate leads from the Vortex platform to the Boldtrail CRM. It provides a simple web interface for agents to trigger migrations for specific lead folders or for daily expired listings.
+VortexSync is a lightweight, automated tool that scrapes "Expired" real estate listings from the Vortex platform and migrates them as new leads into the BoldTrail CRM.
 
-## Features
+The entire process is orchestrated by a GitHub Actions workflow that runs on a daily schedule, ensuring a fresh list of leads is in your CRM every morning without any manual intervention.
 
-- **Simple Web Interface**: A clean UI built with Next.js and Tailwind CSS.
-- **Folder-Based Migration**: Select any folder from your Vortex account and migrate all its leads with a single click.
-- **Expireds Migration**: A dedicated button to migrate all of the latest "Daily Expireds" leads.
-- **Automated Data Transformation**: Automatically converts the downloaded Vortex CSV into a format compatible with Boldtrail's bulk importer.
-- **Dynamic Note Generation**: Creates a detailed, bulleted list of all available lead data in the Boldtrail agent notes for a comprehensive record.
-- **Secure**: All credentials are kept safe in a local `.env` file and are never committed to the repository.
+## How It Works
 
-## Setup and Installation
+1.  **Scheduled Trigger**: A GitHub Actions workflow (`.github/workflows/daily_migration.yml`) runs at 8:30 AM ET every day. It can also be triggered manually.
+2.  **Environment Setup**: The workflow sets up a fresh environment, installs Python dependencies, and installs the Playwright browser automation tool.
+3.  **Scraping**: The main script (`expired_scraper.py`) securely logs into Vortex using credentials stored in GitHub Secrets.
+4.  **Data Extraction**: It navigates to the "Expireds" section, scrapes the relevant lead data, and logs out.
+5.  **Data Migration**: The script then logs into BoldTrail, navigates to the manual lead creation page, and enters the scraped data, using utility functions from `boldtrail_utils.py`.
+6.  **Reporting**: Upon completion (or failure), the script uses `email_reporter.py` to send a detailed status report to a designated email address.
 
-Follow these steps to get VortexSync running on your local machine.
+## File Structure
 
-### 1. Clone the Repository
-```bash
-git clone <your-repository-url>
-cd VortexSync
+Here is a breakdown of the key files in this project:
+
+```
+VortexSync/
+├── .github/workflows/daily_migration.yml   # The core GitHub Actions workflow
+├── .env.example                            # Example file for local environment variables
+├── boldtrail_utils.py                      # Functions for interacting with BoldTrail
+├── email_reporter.py                       # Handles sending success/failure email reports
+├── expired_scraper.py                      # The main scraper and migration script
+└── requirements.txt                        # Python dependencies
 ```
 
-### 2. Backend Setup
-First, set up the Python environment for the backend server.
+## Setup and Configuration for Your Use
 
-```bash
-# Create a virtual environment
-python -m venv .venv
+To get this running on your own fork of the repository, you need to configure your account credentials and email settings. This is done by adding **Secrets** to your GitHub repository.
 
-# Activate the virtual environment
-# On Windows:
-.venv\\Scripts\\activate
-# On macOS/Linux:
-# source .venv/bin/activate
+### Step 1: Create a `.env` file for local testing (Optional)
 
-# Install the required Python packages
-pip install -r requirements.txt
+For running the script on your local machine, you can create a `.env` file in the root of the project. This file is ignored by Git and keeps your credentials private.
 
-# Install the required Playwright browser drivers
-playwright install chromium
+Create a file named `.env` and copy the contents of `.env.example`, then fill in your details.
+
+```ini
+# Vortex Credentials
+VORTEX_USER="your-vortex-email@example.com"
+VORTEX_PASS="your-vortex-password"
+
+# BoldTrail Credentials
+BOLDTRAIL_USER="your-boldtrail-email@example.com"
+BOLDTRAIL_PASS="your-boldtrail-password"
+
+# Email Reporting Settings
+EMAIL_TO="recipient@example.com"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT="587"
+EMAIL_USER="your-sending-email@gmail.com"
+EMAIL_PASS="your-gmail-app-password"
 ```
+> **Important**: For `EMAIL_PASS` with a Gmail account, you must use a 16-character **App Password**, not your regular login password. [Learn how to create one here.](https://support.google.com/accounts/answer/185833)
 
-### 3. Frontend Setup
-Next, set up the Node.js environment for the frontend interface.
+### Step 2: Set up GitHub Secrets for Automation
 
-```bash
-# Navigate to the frontend directory
-cd frontend
+The automated workflow relies on GitHub Secrets to access your credentials securely. You must set these in your forked repository.
 
-# Install the required Node packages
-npm install
-```
+1.  In your GitHub repository, go to **Settings** > **Secrets and variables** > **Actions**.
+2.  Click the **New repository secret** button for each secret below.
+3.  The "Name" of the secret must match the variable names exactly. The "Value" should be your personal credential.
 
-### 4. Configuration
-Before running the application, you need to provide your credentials.
+#### Required Secrets:
 
-1.  Make a copy of the `.env.example` file and rename it to `.env`.
-2.  Open the `.env` file and replace the placeholder values with your actual Vortex and Boldtrail login credentials.
+| Secret Name        | Description                                     | Example Value                    |
+| ------------------ | ----------------------------------------------- | -------------------------------- |
+| `VORTEX_USER`      | Your login email for the Vortex platform.       | `agent@example.com`              |
+| `VORTEX_PASS`      | Your login password for the Vortex platform.    | `VortexPassword123`              |
+| `BOLDTRAIL_USER`   | Your login email for the BoldTrail CRM.         | `agent@boldtrail.com`            |
+| `BOLDTRAIL_PASS`   | Your login password for the BoldTrail CRM.      | `BoldtrailPassword456`           |
+| `EMAIL_TO`         | The email address to send reports to.           | `your-personal-email@outlook.com` |
+| `EMAIL_HOST`       | The SMTP server for your email provider.        | `smtp.gmail.com`                 |
+| `EMAIL_PORT`       | The SMTP port (usually 587 for TLS).            | `587`                            |
+| `EMAIL_USER`       | The username for your sending email account.    | `your-automation-email@gmail.com`|
+| `EMAIL_PASS`       | The password or App Password for the email.     | `abdcivogzxjhyqwt`               |
 
-## Running the Application
+## Running the Workflow
 
-VortexSync requires two terminal windows to run simultaneously: one for the backend and one for the frontend.
+The workflow is scheduled to run automatically. If you want to run it manually:
 
-**In your first terminal (for the backend):**
-```bash
-# Make sure you are in the project's root directory (VortexSync)
-# and your virtual environment is activated.
+1.  Go to the **Actions** tab in your GitHub repository.
+2.  Click on the **Daily Expireds Migration** workflow in the left sidebar.
+3.  Click the **Run workflow** dropdown, select the `main` branch, and click the **Run workflow** button.
 
-python -m flask --app backend.app run --port 5000
-```
-
-**In your second terminal (for the frontend):**
-```bash
-# Navigate to the frontend directory
-cd frontend
-
-# Start the Next.js development server
-npm run dev
-```
-
-Once both servers are running, you can access the application by opening your web browser to **`http://localhost:3000`**. 
+You can monitor the progress in the Actions tab and will receive an email report once it's complete.
