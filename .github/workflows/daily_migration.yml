@@ -32,4 +32,9 @@ jobs:
           VORTEX_PASS: ${{ secrets.VORTEX_PASS }}
           BOLDTRAIL_USER: ${{ secrets.BOLDTRAIL_USER }}
           BOLDTRAIL_PASS: ${{ secrets.BOLDTRAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
         run: python expired_scraper.py 

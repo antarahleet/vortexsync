@@ -139,10 +139,74 @@ def run_expired_migration():
         if playwright: playwright.stop() 
 
 if __name__ == "__main__":
-    # Simplified for direct execution and testing.
-    # The script will now run once and print all its progress to the console.
+    from email_reporter import send_report
+    import pandas as pd
+    import traceback
+
     print("VortexSync Daily Expireds Migration: Started")
-    migration_generator = run_expired_migration()
-    for message in migration_generator:
-        print(message)
-    print("VortexSync Daily Expireds Migration: Finished") 
+    
+    log_messages = []
+    success = False
+    error_details = ""
+    
+    try:
+        migration_generator = run_expired_migration()
+        for message in migration_generator:
+            print(message)
+            log_messages.append(str(message))
+
+        # Check for the success marker in the logs
+        if any("Import process appears to be complete." in msg for msg in log_messages):
+            success = True
+        else:
+            # Find the first ERROR message if success marker isn't found
+            error_line = next((line for line in log_messages if line.startswith("ERROR:")), "Unknown error: Migration did not complete.")
+            error_details = error_line
+
+    except Exception as e:
+        success = False
+        print(f"FATAL ERROR: A critical exception occurred: {e}")
+        error_details = traceback.format_exc()
+        log_messages.append(error_details)
+
+    # --- Email Reporting ---
+    print("\n--- Preparing Email Report ---")
+    
+    lead_count = 0
+    lead_names = []
+    boldtrail_csv_path = DOWNLOAD_DIR / "boldtrail_upload.csv"
+    
+    # Try to read lead info, even on failure, as the file might exist
+    if boldtrail_csv_path.exists():
+        try:
+            df = pd.read_csv(boldtrail_csv_path)
+            # Ensure columns exist before trying to access them
+            if 'first_name' in df.columns and 'last_name' in df.columns:
+                lead_names = (df['first_name'].fillna('') + ' ' + df['last_name'].fillna('')).str.strip().tolist()
+                lead_names = [name for name in lead_names if name] # Filter out empty names
+                lead_count = len(lead_names)
+        except Exception as e:
+            log_messages.append(f"Could not read details from boldtrail_upload.csv: {e}")
+
+    # Build Email Subject and Body
+    if success:
+        subject = f"✅ VortexSync Success: {lead_count} Expired Leads Migrated"
+        body = (
+            f"The daily Vortex -> Boldtrail migration for 'Daily Expireds' completed successfully.\n\n"
+            f"Leads Transferred: {lead_count}\n\n"
+        )
+        if lead_names:
+            body += "--- Migrated Leads ---\n" + "\n".join(lead_names) + "\n\n"
+    else:
+        subject = f"❌ VortexSync Failure: Migration Failed"
+        body = (
+            f"The daily Vortex -> Boldtrail migration for 'Daily Expireds' encountered an error.\n\n"
+            f"--- Error Details ---\n{error_details}\n\n"
+        )
+
+    body += "--- Full Log ---\n" + "\n".join(log_messages)
+    
+    # Send the final report
+    send_report(subject, body)
+    
+    print("\nVortexSync Daily Expireds Migration: Finished") 
