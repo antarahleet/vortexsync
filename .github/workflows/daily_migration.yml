@@ -1,0 +1,35 @@
+name: Daily Vortex Migration
+
+on:
+  schedule:
+    # Runs at 8:30 AM UTC every day.
+    # Note: GitHub Actions can sometimes be delayed by 5-15 minutes.
+    - cron: '30 8 * * *'
+  workflow_dispatch:
+    # This line adds a "Run workflow" button to the Actions tab
+    # in GitHub, so you can trigger it manually for testing.
+
+jobs:
+  run-migration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Check out repository code
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 3. Install Playwright dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install chromium
+
+      - name: 4. Run the migration script
+        env:
+          VORTEX_USER: ${{ secrets.VORTEX_USER }}
+          VORTEX_PASS: ${{ secrets.VORTEX_PASS }}
+          BOLDTRAIL_USER: ${{ secrets.BOLDTRAIL_USER }}
+          BOLDTRAIL_PASS: ${{ secrets.BOLDTRAIL_PASS }}
+        run: python expired_scraper.py 

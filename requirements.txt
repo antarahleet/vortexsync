@@ -1,5 +1,3 @@
 playwright
-flask
 pandas
-python-dotenv
-Flask-CORS 
+python-dotenv 

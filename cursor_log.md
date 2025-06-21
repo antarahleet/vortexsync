@@ -252,3 +252,60 @@ The deployment process involved a lengthy and iterative debugging cycle to resol
     -   **Correct Fix**: The final deployment was run with the `--no-cache` flag to force a complete rebuild, ensuring the latest version of all files was used.
 
 After resolving all of these issues, the application was deployed successfully, the migration ran, and a correct success email was sent. 
+
+## 17. Email Reporting Enhancement
+
+The email reporting system was improved to provide more detailed information about the migration process.
+
+1. **Enhanced Email Content**:
+    - Added lead count to the email body
+    - Added a list of all lead names that were attempted to be migrated
+    - Improved error reporting to include more context about failures
+    - Maintained consistent email format regardless of success/failure
+
+2. **Implementation Details**:
+    - Modified the email template to always include lead count and names
+    - Ensured lead names are captured even when the migration fails
+    - Added more detailed error messages in the email body
+    - Improved logging to capture all relevant information for the email report
+
+## 18. Fly.io Deployment and Testing
+
+The application was deployed to Fly.io for production use, with several iterations of testing and improvements.
+
+1. **Initial Deployment**:
+    - Successfully deployed the application to Fly.io
+    - Set up the necessary environment variables and secrets
+    - Configured the deployment to run the migration script
+
+2. **Testing and Observations**:
+    - Ran multiple test migrations to verify functionality
+    - Observed intermittent success/failure patterns
+    - Identified various timeout issues at different stages of the migration
+    - Documented successful and failed migration attempts with detailed logs
+
+3. **Current Status**:
+    - The application is deployed and functional on Fly.io
+    - Email reporting is working with improved detail
+    - Migration process is operational but showing some reliability issues
+    - Further improvements to reliability are being investigated 
+
+## Migration Script Retry Logic Implementation (2024-03-19)
+- Added robust retry mechanism to the daily migration script
+- Implemented automatic retries for failed migrations:
+  - Maximum of 10 retries per day
+  - 3-minute delay between retry attempts
+  - Clear attempt counting in logs and email notifications
+- Enhanced email reporting:
+  - Success emails include lead count and names
+  - Failure emails show attempt number (e.g., "Attempt 2/10")
+  - Added retry information to failure notifications
+- Improved error handling:
+  - Separate handling for migration failures vs email sending failures
+  - Retry on email sending failures if migration was successful
+  - Clear logging of retry attempts and delays
+- Script behavior:
+  - Runs daily at 8:30 AM UTC
+  - Stops after successful migration until next day
+  - Automatically retries on failures with 3-minute intervals
+  - Stops after max retries reached for the day 

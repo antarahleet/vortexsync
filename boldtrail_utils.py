@@ -1,11 +1,10 @@
 from playwright.sync_api import Page
 import os
 import pathlib
-from backend.utils.logger import log
 import pandas as pd
 import re
 
-DOWNLOAD_DIR = pathlib.Path(__file__).resolve().parent.parent / "cache" / "downloads"
+DOWNLOAD_DIR = pathlib.Path(__file__).resolve().parent / "cache" / "downloads"
 BOLDTRAIL_LOGIN_URL = "https://app.boldtrail.com/login"
 
 def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name: str):
@@ -94,7 +93,7 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     yield "--- Starting Boldtrail CSV Upload ---"
     
     yield "Navigating to Boldtrail login page..."
-    page.goto(BOLDTRAIL_LOGIN_URL, timeout=60000)
+    page.goto(BOLDTRAIL_LOGIN_URL, timeout=90000)
     yield "Entering Boldtrail credentials via keyboard..."
     page.wait_for_timeout(1000)
     page.keyboard.press("Tab")
@@ -107,20 +106,20 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     
     yield "Waiting for dashboard to load and finding Lead Engine button..."
     lead_engine_selector = "div.side-menu-item-content:has-text('LeadEngine')"
-    page.wait_for_selector(lead_engine_selector, timeout=60000)
+    page.wait_for_selector(lead_engine_selector, timeout=90000)
     yield "Logged into Boldtrail and found Lead Engine button."
 
     page.locator(lead_engine_selector).click()
     
     yield "Clicking 'Start an Import'..."
     start_import_selector = "button:has-text('Start an Import')"
-    page.wait_for_selector(start_import_selector, timeout=30000)
+    page.wait_for_selector(start_import_selector, timeout=90000)
     page.locator(start_import_selector).click()
 
     yield "Waiting for bulk import page and clicking 'Get Started'..."
-    page.wait_for_url("**/bulk-import", timeout=30000)
+    page.wait_for_url("**/bulk-import", timeout=90000)
     get_started_selector = "button[data-userpilot='do-it-yourself-get-started-button']"
-    page.wait_for_selector(get_started_selector, timeout=30000)
+    page.wait_for_selector(get_started_selector, timeout=90000)
     page.locator(get_started_selector).click()
 
     yield "Waiting for file upload page to load..."
@@ -128,7 +127,7 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
 
     yield f"Uploading {boldtrail_csv_path}..."
     file_input_selector = "input[type='file']" 
-    page.wait_for_selector(file_input_selector, state='attached', timeout=30000)
+    page.wait_for_selector(file_input_selector, state='attached', timeout=90000)
     page.set_input_files(file_input_selector, boldtrail_csv_path)
 
     yield "File selected. Handling preview page..."
