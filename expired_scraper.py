@@ -84,6 +84,11 @@ def run_expired_migration():
         more_button = page.locator('div.top-navbar__more-button:has-text("More")')
         more_button.wait_for(state="visible", timeout=90000)
         page.wait_for_timeout(500)
+        
+        yield "Checking for and removing potential chat widgets..."
+        page.evaluate("document.querySelector('#intercom-container')?.remove()")
+        page.wait_for_timeout(250) # Brief pause for DOM update
+
         more_button.click()
         page.wait_for_timeout(500)
         yield "Clicked 'More' button."
