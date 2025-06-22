@@ -12,11 +12,14 @@ def send_report(subject, body):
         smtp_user = os.environ["EMAIL_USER"]
         smtp_pass = os.environ["EMAIL_PASS"]
         email_to = os.environ["EMAIL_TO"]
+        email_cc = os.getenv("EMAIL_CC") # Use os.getenv for optional CC
 
         msg = EmailMessage()
         msg["Subject"] = subject
         msg["From"] = f"VortexSync Automation <{smtp_user}>"
         msg["To"] = email_to
+        if email_cc:
+            msg["Cc"] = email_cc
         msg.set_content(body)
 
         print("Connecting to SMTP server...")

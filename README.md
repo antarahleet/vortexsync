@@ -76,6 +76,7 @@ The automated workflow relies on GitHub Secrets to access your credentials secur
 | `EMAIL_PORT`       | The SMTP port (usually 587 for TLS).            | `587`                            |
 | `EMAIL_USER`       | The username for your sending email account.    | `your-automation-email@gmail.com`|
 | `EMAIL_PASS`       | The password or App Password for the email.     | `abdcivogzxjhyqwt`               |
+| `EMAIL_CC`         | (Optional) A second email for CC'ing reports.   | `manager@example.com`            |
 
 ## Running the Workflow
 
