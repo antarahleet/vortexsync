@@ -158,54 +158,67 @@ if __name__ == "__main__":
     from email_reporter import send_report
     import pandas as pd
     import traceback
+    import time
 
     print("VortexSync Daily Expireds Migration: Started")
-    
-    log_messages = []
-    success = False
-    error_details = ""
-    
-    try:
-        migration_generator = run_expired_migration()
-        for message in migration_generator:
-            print(message)
-            log_messages.append(str(message))
 
-        # Check for the success marker in the logs
-        if any("Import process appears to be complete." in msg for msg in log_messages):
-            success = True
-        else:
-            # Find the first ERROR message if success marker isn't found
-            error_line = next((line for line in log_messages if line.startswith("ERROR:")), "Unknown error: Migration did not complete.")
-            error_details = error_line
+    max_attempts = 3
+    final_success = False
+    final_log_messages = []
+    final_error_details = ""
 
-    except Exception as e:
-        success = False
-        print(f"FATAL ERROR: A critical exception occurred: {e}")
-        error_details = traceback.format_exc()
-        log_messages.append(error_details)
+    for attempt in range(1, max_attempts + 1):
+        print(f"\n--- Starting Attempt {attempt} of {max_attempts} ---")
+        
+        log_messages_for_this_attempt = []
+        attempt_success = False
+        
+        try:
+            migration_generator = run_expired_migration()
+            for message in migration_generator:
+                print(message)
+                log_messages_for_this_attempt.append(str(message))
+
+            if any("Import process appears to be complete." in msg for msg in log_messages_for_this_attempt):
+                attempt_success = True
+                final_success = True
+                final_log_messages.extend(log_messages_for_this_attempt)
+                print(f"--- Attempt {attempt} was successful! ---")
+                break # Exit the loop on success
+            else:
+                final_error_details = next((line for line in log_messages_for_this_attempt if line.startswith("ERROR:")), "Unknown error: Migration did not complete.")
+                final_log_messages.extend(log_messages_for_this_attempt)
+                final_log_messages.append("-" * 20) # Separator for logs between attempts
+
+        except Exception as e:
+            print(f"FATAL ERROR: A critical exception occurred on attempt {attempt}: {e}")
+            final_error_details = traceback.format_exc()
+            final_log_messages.extend(log_messages_for_this_attempt)
+            final_log_messages.append(final_error_details)
+            final_log_messages.append("-" * 20)
+        
+        if not attempt_success and attempt < max_attempts:
+            print(f"--- Attempt {attempt} failed. Retrying in 30 seconds... ---")
+            time.sleep(30)
 
     # --- Email Reporting ---
-    print("\n--- Preparing Email Report ---")
+    print("\n--- Preparing Final Email Report ---")
     
     lead_count = 0
     lead_names = []
     boldtrail_csv_path = DOWNLOAD_DIR / "boldtrail_upload.csv"
     
-    # Try to read lead info, even on failure, as the file might exist
     if boldtrail_csv_path.exists():
         try:
             df = pd.read_csv(boldtrail_csv_path)
-            # Ensure columns exist before trying to access them
             if 'first_name' in df.columns and 'last_name' in df.columns:
                 lead_names = (df['first_name'].fillna('') + ' ' + df['last_name'].fillna('')).str.strip().tolist()
-                lead_names = [name for name in lead_names if name] # Filter out empty names
+                lead_names = [name for name in lead_names if name]
                 lead_count = len(lead_names)
         except Exception as e:
-            log_messages.append(f"Could not read details from boldtrail_upload.csv: {e}")
+            final_log_messages.append(f"Could not read details from boldtrail_upload.csv: {e}")
 
-    # Build Email Subject and Body
-    if success:
+    if final_success:
         subject = f"✅ VortexSync Success: {lead_count} Expired Leads Migrated"
         body = (
             f"The daily Vortex -> Boldtrail migration for 'Daily Expireds' completed successfully.\n\n"
@@ -214,15 +227,14 @@ if __name__ == "__main__":
         if lead_names:
             body += "--- Migrated Leads ---\n" + "\n".join(lead_names) + "\n\n"
     else:
-        subject = f"❌ VortexSync Failure: Migration Failed"
+        subject = f"❌ VortexSync Failure: Migration Failed After {max_attempts} Attempts"
         body = (
-            f"The daily Vortex -> Boldtrail migration for 'Daily Expireds' encountered an error.\n\n"
-            f"--- Error Details ---\n{error_details}\n\n"
+            f"The daily Vortex -> Boldtrail migration failed after {max_attempts} attempts.\n\n"
+            f"--- Final Error Details ---\n{final_error_details}\n\n"
         )
 
-    body += "--- Full Log ---\n" + "\n".join(log_messages)
+    body += "--- Full Log (All Attempts) ---\n" + "\n".join(final_log_messages)
     
-    # Send the final report
     send_report(subject, body)
     
     print("\nVortexSync Daily Expireds Migration: Finished") 
