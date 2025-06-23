@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from dotenv import load_dotenv
@@ -37,7 +38,8 @@ def run_expired_migration():
         # Set a large viewport for headless mode to ensure all desktop UI elements are visible.
         context = browser.new_context(
             accept_downloads=True,
-            viewport={'width': 1920, 'height': 1080}
+            viewport={'width': 1920, 'height': 1080},
+            downloads_path=str(DOWNLOAD_DIR)
         )
         page = context.new_page()
 
@@ -101,14 +103,28 @@ def run_expired_migration():
         vortex_csv_filename = "daily_expireds.csv"
         vortex_csv_path = DOWNLOAD_DIR / vortex_csv_filename
 
-        with page.expect_download(timeout=60000) as download_info:
-            export_button.click()
-        download = download_info.value
-        page.wait_for_timeout(500)
-        download.save_as(vortex_csv_path)
-        page.wait_for_timeout(500)
-        
-        yield f"SUCCESS: File downloaded to {vortex_csv_path}"
+        # Pre-emptively remove old file to ensure a clean check
+        if vortex_csv_path.exists():
+            vortex_csv_path.unlink()
+
+        try:
+            with page.expect_download(timeout=60000) as download_info:
+                export_button.click()
+            download = download_info.value
+            download.save_as(vortex_csv_path)
+            yield f"SUCCESS: Download event detected and file saved to {vortex_csv_path}"
+
+        except PlaywrightTimeoutError:
+            yield "WARNING: Download event was not detected in 60 seconds. Verifying file on disk..."
+            # Fallback: Check if the file was downloaded anyway despite the timeout.
+            time.sleep(5) # Give a few extra seconds for the write to complete
+            if vortex_csv_path.is_file() and vortex_csv_path.stat().st_size > 0:
+                yield f"SUCCESS: Verified file exists at {vortex_csv_path}."
+                pass # The file exists, so we can proceed successfully.
+            else:
+                yield "ERROR: Verification failed. File not found on disk after timeout."
+                raise # The download truly failed, so re-raise the timeout error.
+
         page.wait_for_timeout(500)
 
         # --- Part 2: Transform CSV ---
