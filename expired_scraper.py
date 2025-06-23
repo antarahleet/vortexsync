@@ -38,8 +38,7 @@ def run_expired_migration():
         # Set a large viewport for headless mode to ensure all desktop UI elements are visible.
         context = browser.new_context(
             accept_downloads=True,
-            viewport={'width': 1920, 'height': 1080},
-            downloads_path=str(DOWNLOAD_DIR)
+            viewport={'width': 1920, 'height': 1080}
         )
         page = context.new_page()
 
