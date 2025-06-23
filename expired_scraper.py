@@ -101,7 +101,7 @@ def run_expired_migration():
         vortex_csv_filename = "daily_expireds.csv"
         vortex_csv_path = DOWNLOAD_DIR / vortex_csv_filename
 
-        with page.expect_download() as download_info:
+        with page.expect_download(timeout=60000) as download_info:
             export_button.click()
         download = download_info.value
         page.wait_for_timeout(500)
