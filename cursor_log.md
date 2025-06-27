@@ -317,3 +317,34 @@ Following successful authentication, I proceeded to set all the necessary secret
 With the secrets in place, all changes were committed and pushed to the `main` branch. I then authored a brand-new `README.md` file from scratch, as the old one was completely obsolete. The new documentation accurately describes the project's current, simplified architecture, explains the file structure, and provides clear, step-by-step instructions for other users on how to configure the tool for their own use by setting up the required GitHub Secrets.
 
 Finally, we confirmed the daily schedule. I noticed the cron job was set to run at 8:30 AM UTC instead of the desired 8:30 AM ET. I corrected the cron expression in the `daily_migration.yml` workflow file and pushed the fix. The user then requested one last feature: the ability to CC an additional recipient on the report emails. I implemented this by adding support for an optional `EMAIL_CC` secret, updating the `email_reporter.py` script, the workflow file, and the `README.md`, and setting the new secret in the repository. 
+
+## 19. Pivot to GitHub Actions for Automation
+
+To improve reliability and simplify the deployment process, the project was completely refactored to use GitHub Actions as the scheduler and runner, removing the dependency on a live Fly.io web server.
+
+- **Infrastructure Change**: The `Dockerfile` and `fly.toml` were removed. The Flask web server and all associated UI components were stripped out of the project.
+- **New Workflow**: A new file, `.github/workflows/daily_migration.yml`, was created to define the entire automated process. This workflow runs on a schedule, sets up a clean Python environment, installs dependencies, and executes the scraper script.
+- **Secrets Management**: All credentials were migrated from Fly.io secrets to the GitHub repository's "Actions secrets" for secure access during workflow runs.
+- **README Overhaul**: The `README.md` was completely rewritten to reflect the new, simplified architecture and provide clear setup instructions for the GitHub Actions-based approach.
+
+## 20. Hardening the GitHub Actions Workflow
+
+After the initial migration to GitHub Actions, several intermittent errors were diagnosed and resolved to make the script more resilient.
+
+- **Directory Creation Error**: The initial runs failed because the `/cache/downloads` directory did not exist in the ephemeral GitHub Actions runner. This was fixed by updating `expired_scraper.py` to create parent directories (`parents=True`) when it makes the downloads folder.
+- **Click Interception by Chat Widget**: A timeout error when clicking the "More" button was traced to an intermittent Intercom live chat widget physically covering the button. This was resolved by adding a JavaScript snippet to the scraper that defensively removes the chat widget from the DOM before attempting the click.
+- **Download Timeout Failures**: Scheduled runs were failing with a "waiting for event 'download'" timeout.
+    - **Hypothesis**: The user correctly deduced this was likely because no "Daily Expireds" were available on some days, meaning the export process never started.
+    - **First Fix**: The script was made more patient by increasing the download event timeout to 60 seconds.
+    - **Second Fix**: A "Trust, but Verify" logic was added. The script now tries to detect the download event, but if it times out, it performs a fallback check to see if the file was downloaded anyway before failing.
+    - **Third Fix**: The failure email report was enhanced. It now detects this specific download timeout error and adds a note to the email suggesting the likely cause is no available leads for that day.
+- **Playwright Version Incompatibility**: An `unexpected keyword argument 'downloads_path'` error revealed that the GitHub runner was using an older version of Playwright. The script was corrected to remove the argument, and the `requirements.txt` was updated to pin `playwright` to a specific version (`1.44.0`) to ensure a consistent environment on every run.
+- **Multi-Attempt Retry Logic**: As a final layer of robustness, the main execution block of `expired_scraper.py` was wrapped in a 3-attempt retry loop. The script will now automatically retry on failure, with a short delay, and will only send a failure email if all three attempts are unsuccessful.
+
+## 21. Final Configuration
+
+- **Schedule**: The GitHub Actions workflow was updated to run once daily at **7:30 AM ET**.
+- **Email Recipients**: The email reporting was configured to send reports to `antarahleet@outlook.com` and CC `aleet@revolvre.com` and `broker@revolvre.com`.
+- **Credentials**: The BoldTrail credentials were updated to a new user account.
+
+The project is now in a stable, robust, and fully automated state. 
