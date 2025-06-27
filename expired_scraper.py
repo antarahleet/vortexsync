@@ -231,6 +231,12 @@ if __name__ == "__main__":
             f"The daily Vortex -> Boldtrail migration failed after {max_attempts} attempts.\n\n"
             f"--- Final Error Details ---\n{final_error_details}\n\n"
         )
+        # Add special context if the failure was the specific download timeout
+        if "waiting for event \"download\"" in final_error_details:
+            body += (
+                "**Important Note:** This specific timeout error often occurs when there are no 'Daily Expireds' available to download. "
+                "Please verify on the Vortex website if this failure repeats.\n\n"
+            )
 
     body += "--- Full Log (All Attempts) ---\n" + "\n".join(final_log_messages)
     
