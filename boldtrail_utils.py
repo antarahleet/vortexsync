@@ -114,6 +114,11 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     yield "Clicking 'Start an Import'..."
     start_import_selector = "button:has-text('Start an Import')"
     page.wait_for_selector(start_import_selector, timeout=90000)
+    
+    yield "Checking for and removing potential chat widgets..."
+    page.evaluate("document.querySelector('#intercom-container')?.remove()")
+    page.wait_for_timeout(250) # Brief pause for DOM update
+
     page.locator(start_import_selector).click()
 
     yield "Waiting for bulk import page and clicking 'Get Started'..."
