@@ -86,8 +86,11 @@ def run_expired_migration():
         more_button.wait_for(state="visible", timeout=90000)
         page.wait_for_timeout(500)
         
-        yield "Checking for and removing potential chat widgets..."
+        yield "Checking for and removing potential popups..."
+        # Remove the Intercom chat widget if it exists
         page.evaluate("document.querySelector('#intercom-container')?.remove()")
+        # Remove the new Admin Custom Popup if it exists
+        page.evaluate("document.querySelector('admin-custom-popup')?.remove()")
         page.wait_for_timeout(250) # Brief pause for DOM update
 
         more_button.click()
