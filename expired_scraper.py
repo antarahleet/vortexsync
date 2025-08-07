@@ -57,16 +57,51 @@ def run_expired_migration():
         page.wait_for_timeout(500)
 
         yield "Waiting for dashboard to load..."
-        page.wait_for_selector("text=MY FOLDERS", timeout=60000)
+        page.wait_for_selector("text=Welcome", timeout=60000)
         page.wait_for_timeout(500)
         yield "Dashboard loaded successfully."
+        
+        # Handle the new onboarding modal if it appears
+        yield "Checking for onboarding modal..."
+        try:
+            setup_later_button = page.locator("button:has-text('Set Up Later')")
+            if setup_later_button.is_visible(timeout=5000):
+                setup_later_button.click()
+                yield "Clicked 'Set Up Later' to dismiss onboarding modal."
+                page.wait_for_timeout(1000)
+        except:
+            yield "No onboarding modal found, proceeding..."
+        
+        # Navigate to Prospects section
+        yield "Navigating to Prospects section..."
+        prospects_link = page.locator("a.top-navbar__app-link:nth-child(1)")
+        prospects_link.wait_for(state="visible", timeout=90000)
+        prospects_link.click()
+        page.wait_for_timeout(2000)
+        yield "Clicked on Prospects section."
         page.wait_for_timeout(500)
 
-        yield f"Searching for and clicking on filter: '{SOURCE_NAME}'..."
-        expired_filter_selector = f"div.folder-item-text:has-text('{SOURCE_NAME}')"
-        page.locator(expired_filter_selector).click()
-        page.wait_for_timeout(500)
-        yield f"Clicked filter: '{SOURCE_NAME}'."
+        yield f"Searching for expired leads in the new interface..."
+        
+        # Look for the "Expired" section in the New Leads widget
+        try:
+            # First try to find the "Expired" text in the New Leads section
+            expired_section = page.locator("text=Expired")
+            expired_section.wait_for(state="visible", timeout=30000)
+            expired_section.click()
+            yield "Clicked on 'Expired' section in New Leads."
+            page.wait_for_timeout(2000)
+        except:
+            # Fallback: try to find any element containing "Expired" and click it
+            yield "Trying alternative method to find expired leads..."
+            expired_elements = page.locator("*:has-text('Expired')")
+            if expired_elements.count() > 0:
+                expired_elements.first.click()
+                yield "Clicked on first 'Expired' element found."
+                page.wait_for_timeout(2000)
+            else:
+                raise Exception("Could not find 'Expired' section in the new Vortex interface")
+        
         yield "Waiting for lead data to finish loading..."
         page.wait_for_load_state('networkidle', timeout=90000)
         yield "Lead data loaded."
