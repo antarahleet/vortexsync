@@ -31,9 +31,11 @@ def run_expired_migration():
         
         playwright = sync_playwright().start()
         
-        # Forcing headed mode for local debugging.
-        yield f"Launching browser in headed mode."
-        browser = playwright.chromium.launch(headless=False)
+        # Launch non-headless for local debugging if HEADLESS=false is set.
+        # Defaults to headless for production/unspecified environments.
+        headless_mode = os.getenv("HEADLESS", "true").lower() == "true"
+        yield f"Launching browser in {'headless' if headless_mode else 'headed'} mode."
+        browser = playwright.chromium.launch(headless=headless_mode)
         
         # Use a non-incognito context to better mimic real user behavior
         # Set a large viewport for headless mode to ensure all desktop UI elements are visible.
