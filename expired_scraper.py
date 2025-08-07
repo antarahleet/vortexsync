@@ -31,8 +31,9 @@ def run_expired_migration():
         
         playwright = sync_playwright().start()
         
-        # Always launch headless in the container, this is the most reliable way.
-        browser = playwright.chromium.launch(headless=True)
+        # Forcing headed mode for local debugging.
+        yield f"Launching browser in headed mode."
+        browser = playwright.chromium.launch(headless=False)
         
         # Use a non-incognito context to better mimic real user behavior
         # Set a large viewport for headless mode to ensure all desktop UI elements are visible.
@@ -102,10 +103,7 @@ def run_expired_migration():
             else:
                 raise Exception("Could not find 'Expired' section in the new Vortex interface")
         
-        yield "Waiting for lead data to finish loading..."
-        page.wait_for_load_state('networkidle', timeout=90000)
-        yield "Lead data loaded."
-        page.wait_for_timeout(1000)
+        yield "Waiting for lead data to load..."
 
         yield "Waiting for and clicking 'Select All' checkbox..."
         select_all_checkbox = page.locator("#vxtb-button-check")
