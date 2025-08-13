@@ -27,7 +27,8 @@ def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name
     boldtrail_columns = [
         'first_name', 'last_name', 'status', 'deal_type', 'email_optin', 
         'text_on', 'phone_on', 'email', 'cell_phone_1', 'primary_address', 
-        'primary_city', 'primary_state', 'primary_zip', 'agent_notes'
+        'primary_city', 'primary_state', 'primary_zip', 'agent_notes',
+        'source'
     ]
 
     for index, vortex_lead in vortex_df.iterrows():
@@ -51,13 +52,9 @@ def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name
         note_header = f"[Vortex Source: {source_name}]"
         note_bullets = []
         for col, val in vortex_lead.items():
-            # Check if value is not null/NaN and not just whitespace
             if pd.notna(val) and str(val).strip():
-                # Format column name and add a bullet point
                 formatted_col = col.replace('_', ' ').lower()
                 note_bullets.append(f"* {formatted_col}: {str(val).strip()}")
-        
-        # Join with real newlines. Header, blank line, then bulleted list.
         agent_note = f"{note_header}\n\n" + "\n".join(note_bullets)
 
         boldtrail_lead = {
@@ -74,7 +71,8 @@ def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name
             'primary_city': city,
             'primary_state': state,
             'primary_zip': zip_code,
-            'agent_notes': agent_note
+            'agent_notes': agent_note,
+            'source': 'VortexSync'
         }
         boldtrail_leads.append(boldtrail_lead)
 
@@ -85,6 +83,7 @@ def transform_vortex_to_boldtrail_csv(vortex_csv_path: pathlib.Path, source_name
     
     yield f"SUCCESS: Transformed CSV created at {boldtrail_csv_path}"
     yield {"boldtrail_csv_path": boldtrail_csv_path} # Yield path separately
+
 
 def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source_name: str):
     """
@@ -99,7 +98,13 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     page.keyboard.press("Tab")
     page.keyboard.type(os.getenv("BOLDTRAIL_USER"))
     page.keyboard.press("Enter")
-    page.wait_for_timeout(1500)
+    
+    # Wait for password field to appear after email submission
+    yield "Waiting for password field to appear..."
+    password_input_selector = "input[type='password']"
+    page.wait_for_selector(password_input_selector, timeout=30000)
+    page.wait_for_timeout(1000)
+    
     page.keyboard.press("Tab")
     page.keyboard.type(os.getenv("BOLDTRAIL_PASS"))
     page.keyboard.press("Enter")
@@ -152,6 +157,7 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     page.locator(next_button_selector).click()
     yield "Clicked 'Next' button on routing page."
 
+    # Add hashtag as before
     hashtag_input_selector = "input[placeholder='Search For Hashtags']"
     page.wait_for_selector(hashtag_input_selector, timeout=10000)
     hashtag_input = page.locator(hashtag_input_selector)
@@ -159,6 +165,45 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     hashtag_input.type("vortexsync")
     hashtag_input.press("Enter")
     yield "Added 'vortexsync' hashtag."
+
+    # Select Smart Campaign per request
+    campaign_name = 'WATCH VIDEO FIRST!!!'
+    campaign_input_selector = "div.fake-input:nth-child(1) > div:nth-child(1) > input:nth-child(2)"
+    yield "Selecting Smart Campaign..."
+    try:
+        page.wait_for_selector(campaign_input_selector, timeout=10000)
+        campaign_input = page.locator(campaign_input_selector)
+        campaign_input.click()
+        yield "Clicked on campaign dropdown"
+        
+        # Wait for dropdown options to appear and select the campaign
+        # Look for the specific campaign option in the dropdown
+        page.wait_for_timeout(1000)  # Wait for dropdown to fully open
+        
+        # Try to find the campaign option by looking for it in the dropdown area
+        campaign_option_selector = f"div.dropdown-option:has-text('{campaign_name}'), div.option:has-text('{campaign_name}'), div:has-text('{campaign_name}'):not([id='__nuxt']):not([id='__layout'])"
+        
+        try:
+            page.wait_for_selector(campaign_option_selector, timeout=10000)
+            page.locator(campaign_option_selector).first.click()
+            yield f"Selected campaign: {campaign_name}"
+        except:
+            # Fallback: try to find any element with the campaign name that's clickable
+            yield f"Trying alternative method to select campaign: {campaign_name}"
+            all_campaign_elements = page.locator(f"*:has-text('{campaign_name}')")
+            if all_campaign_elements.count() > 0:
+                # Find the most likely dropdown option (not the main page divs)
+                for i in range(all_campaign_elements.count()):
+                    element = all_campaign_elements.nth(i)
+                    try:
+                        if element.is_visible() and element.is_enabled():
+                            element.click()
+                            yield f"Selected campaign using alternative method: {campaign_name}"
+                            break
+                    except:
+                        continue
+    except Exception as e:
+        yield f"WARNING: Could not select campaign automatically: {e}"
 
     # Final Submission
     finish_button_selector = "button.next-btn:has-text('Finish')"

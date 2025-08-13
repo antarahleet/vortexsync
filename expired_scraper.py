@@ -34,6 +34,7 @@ def run_expired_migration():
         # Launch non-headless for local debugging if HEADLESS=false is set.
         # Defaults to headless for production/unspecified environments.
         headless_mode = os.getenv("HEADLESS", "true").lower() == "true"
+        yield f"DEBUG: HEADLESS env var = '{os.getenv('HEADLESS')}', headless_mode = {headless_mode}"
         yield f"Launching browser in {'headless' if headless_mode else 'headed'} mode."
         browser = playwright.chromium.launch(headless=headless_mode)
         
