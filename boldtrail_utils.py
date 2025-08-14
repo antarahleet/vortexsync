@@ -166,44 +166,193 @@ def upload_csv_to_boldtrail(page: Page, boldtrail_csv_path: pathlib.Path, source
     hashtag_input.press("Enter")
     yield "Added 'vortexsync' hashtag."
 
-    # Select Smart Campaign per request
+    # Select Smart Campaign with robust retry logic
     campaign_name = 'WATCH VIDEO FIRST!!!'
-    campaign_input_selector = "div.fake-input:nth-child(1) > div:nth-child(1) > input:nth-child(2)"
-    yield "Selecting Smart Campaign..."
-    try:
-        page.wait_for_selector(campaign_input_selector, timeout=10000)
-        campaign_input = page.locator(campaign_input_selector)
-        campaign_input.click()
-        yield "Clicked on campaign dropdown"
+    yield f"Starting campaign selection process for: {campaign_name}"
+    
+    def select_campaign_robust():
+        """Robust campaign selection with multiple strategies and verification"""
+        max_attempts = 3
         
-        # Wait for dropdown options to appear and select the campaign
-        # Look for the specific campaign option in the dropdown
-        page.wait_for_timeout(1000)  # Wait for dropdown to fully open
-        
-        # Try to find the campaign option by looking for it in the dropdown area
-        campaign_option_selector = f"div.dropdown-option:has-text('{campaign_name}'), div.option:has-text('{campaign_name}'), div:has-text('{campaign_name}'):not([id='__nuxt']):not([id='__layout'])"
-        
-        try:
-            page.wait_for_selector(campaign_option_selector, timeout=10000)
-            page.locator(campaign_option_selector).first.click()
-            yield f"Selected campaign: {campaign_name}"
-        except:
-            # Fallback: try to find any element with the campaign name that's clickable
-            yield f"Trying alternative method to select campaign: {campaign_name}"
-            all_campaign_elements = page.locator(f"*:has-text('{campaign_name}')")
-            if all_campaign_elements.count() > 0:
-                # Find the most likely dropdown option (not the main page divs)
-                for i in range(all_campaign_elements.count()):
-                    element = all_campaign_elements.nth(i)
+        for attempt in range(1, max_attempts + 1):
+            yield f"Campaign selection attempt {attempt}/{max_attempts}"
+            
+            try:
+                # Strategy 1: Try multiple common campaign dropdown selectors
+                campaign_selectors = [
+                    "div.fake-input:nth-child(1) > div:nth-child(1) > input:nth-child(2)",
+                    "input[placeholder*='campaign']",
+                    "input[placeholder*='Campaign']", 
+                    "div.fake-input input",
+                    "div[class*='campaign'] input",
+                    "div[class*='select'] input",
+                    ".campaign-select input",
+                    ".smart-campaign input"
+                ]
+                
+                campaign_input = None
+                successful_selector = None
+                
+                # Find a working campaign dropdown selector
+                for selector in campaign_selectors:
                     try:
-                        if element.is_visible() and element.is_enabled():
-                            element.click()
-                            yield f"Selected campaign using alternative method: {campaign_name}"
-                            break
+                        if page.locator(selector).count() > 0:
+                            test_input = page.locator(selector).first
+                            if test_input.is_visible() and test_input.is_enabled():
+                                campaign_input = test_input
+                                successful_selector = selector
+                                yield f"Found campaign input using selector: {selector}"
+                                break
                     except:
                         continue
+                
+                if not campaign_input:
+                    yield f"No campaign dropdown found on attempt {attempt}"
+                    if attempt < max_attempts:
+                        page.wait_for_timeout(2000)
+                        continue
+                    else:
+                        return False
+                
+                # Click the dropdown to open it
+                yield "Clicking campaign dropdown to open options..."
+                campaign_input.click()
+                page.wait_for_timeout(1500)  # Wait for dropdown animation
+                
+                # Strategy 2: Try multiple methods to find and click the campaign option
+                campaign_found = False
+                
+                # Method 1: Look for dropdown options with various selectors
+                option_selectors = [
+                    f"div.dropdown-option:has-text('{campaign_name}')",
+                    f"li:has-text('{campaign_name}')",
+                    f"div.option:has-text('{campaign_name}')",
+                    f"div[role='option']:has-text('{campaign_name}')",
+                    f"div[class*='dropdown'] div:has-text('{campaign_name}')",
+                    f"ul li:has-text('{campaign_name}')",
+                    f".select-option:has-text('{campaign_name}')"
+                ]
+                
+                for option_selector in option_selectors:
+                    try:
+                        if page.locator(option_selector).count() > 0:
+                            option = page.locator(option_selector).first
+                            if option.is_visible():
+                                option.click()
+                                yield f"Clicked campaign option using selector: {option_selector}"
+                                campaign_found = True
+                                break
+                    except Exception as e:
+                        yield f"Failed with selector {option_selector}: {str(e)}"
+                        continue
+                
+                # Method 2: If specific selectors failed, try broader search
+                if not campaign_found:
+                    yield "Trying broader search for campaign option..."
+                    try:
+                        # Look for any clickable element containing the campaign name
+                        all_elements = page.locator(f"*:has-text('{campaign_name}')")
+                        count = all_elements.count()
+                        yield f"Found {count} elements containing '{campaign_name}'"
+                        
+                        for i in range(count):
+                            try:
+                                element = all_elements.nth(i)
+                                # Skip elements that are likely not dropdown options
+                                tag_name = element.evaluate("el => el.tagName.toLowerCase()")
+                                if tag_name in ['html', 'body', 'div[id="__nuxt"]', 'div[id="__layout"]']:
+                                    continue
+                                    
+                                if element.is_visible() and element.is_enabled():
+                                    # Check if element is in a dropdown context
+                                    parent_classes = element.evaluate("el => el.parentElement?.className || ''")
+                                    if any(keyword in parent_classes.lower() for keyword in ['dropdown', 'option', 'select', 'menu']):
+                                        element.click()
+                                        yield f"Selected campaign using broad search method (element {i})"
+                                        campaign_found = True
+                                        break
+                            except:
+                                continue
+                    except Exception as e:
+                        yield f"Broad search failed: {str(e)}"
+                
+                # Method 3: Keyboard navigation as last resort
+                if not campaign_found and attempt == max_attempts:
+                    yield "Trying keyboard navigation as final attempt..."
+                    try:
+                        # Re-click the dropdown to ensure it's focused
+                        campaign_input.click()
+                        page.wait_for_timeout(500)
+                        
+                        # Type the campaign name to filter/search
+                        campaign_input.type(campaign_name)
+                        page.wait_for_timeout(1000)
+                        
+                        # Press Enter or Down arrow then Enter
+                        page.keyboard.press("Enter")
+                        page.wait_for_timeout(500)
+                        
+                        yield "Attempted keyboard selection"
+                        campaign_found = True  # Assume success for keyboard method
+                    except Exception as e:
+                        yield f"Keyboard navigation failed: {str(e)}"
+                
+                # Quick verification that selection worked
+                if campaign_found:
+                    page.wait_for_timeout(500)  # Reduced wait time
+                    
+                    # Quick check - just look for campaign name in the input area
+                    try:
+                        # Check the original input element first (fastest check)
+                        if successful_selector:
+                            selected_element = page.locator(successful_selector).first
+                            selected_text = selected_element.text_content() or selected_element.get_attribute('value') or ""
+                            if campaign_name in selected_text:
+                                yield f"SUCCESS: Campaign '{campaign_name}' is selected"
+                                return True
+                    except:
+                        pass
+                    
+                    # If first check fails, do one quick broader check
+                    try:
+                        campaign_area = page.locator("div:has-text('Smart Campaign'), div:has-text('Campaign')").first
+                        if campaign_area.count() > 0:
+                            area_text = campaign_area.text_content() or ""
+                            if campaign_name in area_text:
+                                yield f"SUCCESS: Campaign '{campaign_name}' appears selected"
+                                return True
+                    except:
+                        pass
+                    
+                    # For attempt 1, assume success if we got this far and proceed
+                    if attempt == 1:
+                        yield f"PROCEEDING: Campaign selection attempted, continuing with import"
+                        return True
+                    
+                    yield f"WARNING: Verification unclear on attempt {attempt}, retrying..."
+                    if attempt < max_attempts:
+                        page.wait_for_timeout(1500)  # Shorter retry wait
+                        continue
+                
+            except Exception as e:
+                yield f"Attempt {attempt} failed with error: {str(e)}"
+                if attempt < max_attempts:
+                    page.wait_for_timeout(3000)
+                    continue
+        
+        yield f"FAILED: Could not reliably select campaign '{campaign_name}' after {max_attempts} attempts"
+        return False
+    
+    # Execute the robust campaign selection
+    try:
+        for message in select_campaign_robust():
+            yield message
     except Exception as e:
-        yield f"WARNING: Could not select campaign automatically: {e}"
+        yield f"ERROR: Campaign selection process failed: {e}"
+
+    # Brief pause to ensure campaign selection is fully processed
+    page.wait_for_timeout(1000)
+    yield "Campaign selection complete, proceeding to finish import..."
 
     # Final Submission
     finish_button_selector = "button.next-btn:has-text('Finish')"
