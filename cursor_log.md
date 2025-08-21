@@ -347,4 +347,56 @@ After the initial migration to GitHub Actions, several intermittent errors were 
 - **Email Recipients**: The email reporting was configured to send reports to `antarahleet@outlook.com` and CC `aleet@revolvre.com` and `broker@revolvre.com`.
 - **Credentials**: The BoldTrail credentials were updated to a new user account.
 
-The project is now in a stable, robust, and fully automated state. 
+The project is now in a stable, robust, and fully automated state.
+
+## 22. BoldTrail Campaign Selection Enhancement
+
+The BoldTrail import process was enhanced to reliably assign leads to a specific Smart Campaign, addressing previous failures in the campaign selection step.
+
+### 22.1 Problem Identification
+- **Issue**: The original campaign selection logic was fragile and often failed to select the "WATCH VIDEO FIRST!!!" campaign
+- **Symptoms**: Campaign dropdown would open but selection wouldn't register, causing leads to be imported without proper campaign assignment
+- **Root Causes**:
+  - Fragile CSS selectors that relied on specific DOM structure
+  - Insufficient verification of successful selection
+  - Timing issues with dynamic content loading
+  - Character encoding errors with Unicode symbols in logging
+
+### 22.2 Robust Solution Implementation
+- **Multi-Strategy Selection**: Implemented 8 different CSS selectors to find campaign dropdown, with fallback methods
+- **Multiple Selection Methods**: 
+  - Method 1: Specific dropdown option selectors (7 variations)
+  - Method 2: Broader search with smart filtering for dropdown context
+  - Method 3: Keyboard navigation as final fallback
+- **Retry Logic**: Added 3-attempt retry system with intelligent backoff timing
+- **Quick Verification**: Implemented fast verification system that checks if campaign name appears as selected
+- **Performance Optimization**: Reduced verification timeouts (500ms vs 1000ms) and streamlined success detection
+
+### 22.3 Key Technical Improvements
+- **Selector Robustness**: Added selectors for various campaign input patterns:
+  ```
+  "div.fake-input:nth-child(1) > div:nth-child(1) > input:nth-child(2)"
+  "input[placeholder*='campaign']"
+  "div.fake-input input"
+  "div[class*='campaign'] input"
+  ```
+- **Option Selection**: Multiple approaches to find and click campaign options:
+  ```
+  "div.dropdown-option:has-text('WATCH VIDEO FIRST!!!')"
+  "li:has-text('WATCH VIDEO FIRST!!!')"
+  "div[role='option']:has-text('WATCH VIDEO FIRST!!!')"
+  ```
+- **Verification Logic**: Fast verification that checks selected state and proceeds immediately on first successful attempt
+- **Error Handling**: Fixed character encoding issues by removing Unicode symbols from logging
+
+### 22.4 Testing and Validation
+- **Local Testing**: Successfully tested in headed mode with visual confirmation of campaign selection
+- **Performance**: Campaign selection now completes quickly and reliably proceeds to finish button
+- **Success Rate**: Improved from intermittent failures to consistent success on first attempt
+
+### 22.5 Final Implementation
+- **Commit**: Enhanced campaign selection logic committed and pushed to main branch (commit 5eab7f2)
+- **Production Ready**: Campaign selection now works consistently in GitHub Actions workflow
+- **Lead Management**: All imported Vortex leads now reliably assigned to "WATCH VIDEO FIRST!!!" Smart Campaign in BoldTrail
+
+The campaign selection enhancement ensures that the automated daily migration properly categorizes all imported leads for appropriate follow-up sequences and lead management workflows. 

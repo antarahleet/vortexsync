@@ -1,460 +1,400 @@
 first_name,last_name,status,deal_type,email_optin,text_on,phone_on,email,cell_phone_1,primary_address,primary_city,primary_state,primary_zip,agent_notes,source
-Michael,Binda,New Lead,Seller,yes,yes,yes,,7745017083,127 John Scott Boulevard,"Norton, Ma",MA,02766,"[Vortex Source: Daily Expireds]
+Lm,Fast Labor Llc,New Lead,Seller,yes,yes,yes,,9786328870,205 Gardner Road,"Hubbardston, Ma",MA,01452,"[Vortex Source: Daily Expireds]
 
-* vortex id: 684a99c5125e0a829b3d187a
-* lead status: New
-* listing status: Cancelled
-* property address: 127 John Scott Boulevard
-* property city: Norton, Ma
-* property state: MA
-* property zip: 02766
-* name: Michael Binda
-* mls name: Michael L Binda
-* phone: 774-501-7083
-* address: 127 John Scott Boulevard, Norton, Ma, MA 02766
-* first name: Michael
-* last name: Binda
-* mailing street: 1580 Glebe St
-* mailing city: Taunton
-* mailing state: MA
-* mailing zip: 02780
-* list date: 06-11-2025
-* list price: 989000
-* days on market: 63
-* lead date: 06-12-2025
-* status date: 08-13-2025
-* listing agent: Nick Andrews
-* listing broker: Century 21 Realty Network
-* mls/fsbo id: 73389134
-* bedrooms: 4
-* bathrooms: 3
-* type: SF
-* year built: 2025
-* lot size: 2.20
-* remarks: Welcome to this exceptional new construction home offering over 3,200sqft of beautifully designed living space! This 4 Bed, 2.5 Bath Colonial style residence blends luxury, efficiency, and convenience in one of the most desirable neighborhoods. The first floor features an open layout with gleaming hardwood and tile flooring, a spacious living room with a fireplace, and a stylish kitchen complete with granite countertops, stainless steel appliances, a kitchen island, pantry closet, and slider to a private back deck. A mudroom, half bath, and oversized 2-car garage complete the main level. Upstairs, the main bedroom offers a luxurious retreat with a private suite bath and walk-in closet. Three additional bedrooms and a full bath provide plenty of space for family or guests. This home is equipped with 400 AMP electrical service, 2 heat pumps, central A/C, a backup generator, irrigation system, and an EV charger. Ideal for commuters being just minutes from rt 123&140.
-* agent remarks: Send all offers to nick@realty-net.com.
-* house number: 127
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73389134&o=&n=0
-* tax id: NORTM31P3606",VortexSync
-T,Montauk,New Lead,Seller,yes,yes,yes,,8586031440,290 High Street,"Pembroke, Ma",MA,02359,"[Vortex Source: Daily Expireds]
-
-* vortex id: 6868eb22ed18e173d689ca62
-* lead status: New
-* listing status: Cancelled
-* property address: 290 High Street
-* property city: Pembroke, Ma
-* property state: MA
-* property zip: 02359
-* name: T Montauk
-* mls name: T Montauk
-* phone: 858-603-1440
-* phone status: DNC
-* phone 2: 508-399-8517
-* phone 3: 401-390-8740
-* phone 3 status: DNC
-* address: 290 High Street, Pembroke, Ma, MA 02359
-* first name: T
-* last name: Montauk
-* mailing street: 290 High St
-* mailing city: Pembroke
-* mailing state: MA
-* mailing zip: 02359
-* list date: 07-05-2025
-* list price: 639900
-* days on market: 39
-* lead date: 07-05-2025
-* status date: 08-13-2025
-* listing agent: Andrew Hillman
-* listing broker: Hillman Real Estate
-* mls/fsbo id: 73399746
-* bedrooms: 3
-* bathrooms: 2
-* type: SF
-* year built: 1952
-* lot size: 1.00
-* remarks: Beautiful home with many upgrades. Roof replaced in 2018, Windows replaced in 2020, Hardwood floors redone in 2020, Kitchen redone in 2020, Bathrooms renovated in 2024, Family room completely renovated in 2019, EV charging station 2024, generator transfer switch 2019, upgraded wiring 2019. New Septic will installed before closing. Huge fenced in backyard with pool. Subject to the seller finding suitable housing.
-* phone counter: 0
-* email counter: 0
-* mail counter: 0
-* house number: 290
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73399746&o=&n=0
-* tax id: PEMBME8P6",VortexSync
-Jason,Gendreauvisco,New Lead,Seller,yes,yes,yes,,5086724842,654 Highland Ave,"Fall River, Ma",MA,02720,"[Vortex Source: Daily Expireds]
-
-* vortex id: 620530e132ef7b4e5505f118
-* lead status: New
-* listing status: Cancelled
-* property address: 654 Highland Ave
-* property city: Fall River, Ma
-* property state: MA
-* property zip: 02720
-* name: Jason Gendreauvisco
-* name 2: Aaron Gendreauvisco
-* mls name: Louis Mello
-* mls name 2: Fatima Barboza
-* phone: 508-672-4842
-* phone status: DNC
-* phone 2: 508-587-6436
-* phone 2 status: DNC
-* phone 3: 508-922-6969
-* phone 3 status: DNC
-* address: 654 Highland Ave, Fall River, Ma, MA 02720
-* address 2: 654 Highland Ave, Fall River, Ma, MA 02720
-* first name: Jason
-* last name: Gendreauvisco
-* mailing street: 654 Highland Ave
-* mailing city: Fall River
-* mailing state: MA
-* mailing zip: 02720
-* list date: 04-15-2025
-* list price: 1285000
-* days on market: 120
-* lead date: 02-10-2022
-* expired date: 03-31-2022
-* status date: 08-13-2025
-* listing agent: Jennifer DaPonte
-* listing broker: Berkshire Hathaway HomeServices Robert Paul Properties
-* mls/fsbo id: 73359908
-* bedrooms: 7
-* bathrooms: 4
-* type: SF
-* square footage: 7570
-* year built: 1901
-* lot size: 0.37
-* remarks: Built in 1901, the Robert Marshall House is an exquisite Georgian Revival mansion in the heart of the Highlands. This architectural gem showcases timeless elegance with rich oak wainscoting, coffered ceilings, and custom period details throughout. The main level features an updated kitchen with two pantries, a mahogany-wrapped library, formal living and dining rooms, and a graceful music room. Upstairs, the spacious master suite includes a private patio, full bath, and optional sitting room, den or  bedroom, accompanied by three additional bedrooms and another full bath. The third level, originally servant quarters, offers two updated bedrooms with expansion potential. The basement features a 1/2 bath, laundry room, additional kitchen and ample storage.  Outside, enjoy a generous backyard with a pergola, portico, charming stone patio, and a two-car garage.  A rare opportunity to own a piece of Highlands history where architectural beauty and modern comfort come together.
-* phone counter: 0
-* email counter: 0
-* mail counter: 0
-* house number: 654
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73359908&o=&n=0
-* tax id: FALLM0M20B0000L0005
-* agent phone: 5089514957",VortexSync
-Shao,Huang,New Lead,Seller,yes,yes,yes,,7813914318,174 Gilbert St,"Mansfield, MA",MA,02048,"[Vortex Source: Daily Expireds]
-
-* vortex id: 6442af7e6663d755407ea13c
+* vortex id: 685525ca3acf746e920fc9b2
 * lead status: New
 * listing status: Expired
-* property address: 174 Gilbert St
-* property city: Mansfield, MA
+* property address: 205 Gardner Road
+* property city: Hubbardston, Ma
 * property state: MA
-* property zip: 02048
-* name: Shao Huang
-* name 2: Fan Huang
-* mls name: George E Knight
-* phone: 781-391-4318
+* property zip: 01452
+* name: Lm Fast Labor Llc
+* mls name: Lm Fast Labor Llc
+* phone: 978-632-8870
 * phone status: DNC
-* phone 2: 617-820-4063
-* phone 3: 617-818-4697
-* address: 174 Gilbert St, Mansfield, Ma, MA 02048
-* address 2: 174 Gilbert St, Mansfield, Ma, MA 02048
-* first name: Shao
-* last name: Huang
-* mailing street: 500 Salem St Apt 608
-* mailing city: Medford
-* mailing state: MA
-* mailing zip: 02155
-* list date: 06-12-2025
-* list price: 889900
-* days on market: 62
-* lead date: 04-21-2023
-* expired date: 08-13-2025
-* status date: 08-13-2025
-* listing agent: Esposito Group
-* listing broker: eXp Realty
-* mls/fsbo id: 73390716
-* bedrooms: 3
-* bathrooms: 3
-* type: SF
-* year built: 1930
-* lot size: 1.00
-* remarks: MANSFIELD--This 1930-built stunner was reimagined from the foundation up in 2025 with a sleek, city-inspired vibe and all new systems, roof, windows, siding, plumbing, electrical, insulation, septic and more. Set on a wooded lot with a lush new yard, this home shines with high ceilings, glossy hardwoods, recessed lighting, and custom trim throughout. Featuring 3 beds plus main floor office and a front-to-back 3rd floor Family Room. The modern kitchen features granite counters, stainless steel appliances, induction range, vent hood, large island, eat-in area & slider to back deck. Other standout features include a dedicated mudroom and a dreamy primary suite w/catwalk leading a private balcony. Laundry hookups in upstairs hall closet. Central Air, Gas Heat, Town Water, New 3-bed Septic. Detached 1-car & 2-car garages + 5-car driveway. A one-of-a-kind blend of old soul & modern edge?this one turns heads.
-* agent remarks: Please send any offer to offers@espositohomes.com; guidelines attached.
-* phone counter: 0
-* email counter: 0
-* mail counter: 0
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73390716&o=&n=0
-* tax id: MANSM003B083",VortexSync
-Kara,Albert,New Lead,Seller,yes,yes,yes,,6172569088,613 Delano Rd,"Marion, Ma",MA,02738,"[Vortex Source: Daily Expireds]
-
-* vortex id: 67d2a1af42a7c290e049b2b4
-* lead status: New
-* listing status: Expired
-* property address: 613 Delano Rd
-* property city: Marion, Ma
-* property state: MA
-* property zip: 02738
-* name: Kara Albert
-* name 2: Kevin Albert
-* name 3: Yahweh Properties Llc
-* mls name: Yahweh Properties Llc
-* phone: 617-256-9088
-* phone status: DNC
-* phone 2: 617-596-1901
-* phone 2 status: DNC
-* phone 3: 617-720-0189
-* phone 3 status: DNC
-* phone 4: 781-400-1156
-* phone 4 status: DNC
-* phone 5: 617-491-6863
-* phone 5 status: DNC
-* address: 613 Delano Rd, Marion, Ma, MA 02738
-* first name: Kara
-* last name: Albert
-* mailing street: 63 Melrose Ave
-* mailing city: Needham
-* mailing state: MA
-* mailing zip: 02492
-* list date: 03-12-2025
-* list price: 599999
-* days on market: 66
-* lead date: 03-13-2025
-* expired date: 08-13-2025
-* withdrawn date: 05-17-2025
-* status date: 08-13-2025
-* listing agent: Freedom Realty Group
-* listing broker: RE/MAX Vantage
-* mls/fsbo id: 73344387
-* bedrooms: 4
-* bathrooms: 2
-* type: SF
-* year built: 1902
-* lot size: 0.24
-* remarks: Welcome to the heart of Marion! This beautifully updated 4-bedroom, 2-bathroom home offers modern amenities in a peaceful Marion neighborhood. The  kitchen was designed with both functionality and style! Features brand-new appliances, and a full bathroom just beside it! While the luxurious primary bath includes a curb less shower, soaker tub, and heated tile floors for ultimate comfort. Laundry hookups are conveniently located upstairs. Enjoy the bright, open living spaces and a private backyard perfect for relaxation.With ample storage, natural light, and a fully renovated design, this home is ready to move in. 3 levels of living for added options with extra finished space! Close to all that Marion has to offer?schedule your showing today!
-* agent remarks: All deposits to be made with bank checks only!
-* phone counter: 0
-* email counter: 0
-* mail counter: 0
-* house number: 613
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73344387&o=&n=0
-* tax id: MARIM007AB0006L0000",VortexSync
-Dc,Realty Llc,New Lead,Seller,yes,yes,yes,,9783331546,136 Narrow Ln,"Lancaster, Ma",MA,01523,"[Vortex Source: Daily Expireds]
-
-* vortex id: 684beba241a4d5c445ef4733
-* lead status: New
-* listing status: Cancelled
-* property address: 136 Narrow Ln
-* property city: Lancaster, Ma
-* property state: MA
-* property zip: 01523
-* name: Dc Realty Llc
-* mls name: Dc Realty Llc
-* phone: 978-333-1546
-* phone status: DNC
-* phone 2: 248-770-5187
-* phone 2 status: DNC
-* phone 3: 978-846-9042
-* phone 3 status: DNC
-* phone 4: 978-537-6030
-* phone 5: 978-853-7603
-* phone 5 status: DNC
-* address: 136 Narrow Ln, Lancaster, Ma, MA 01523
-* first name: Dc
+* address: 205 Gardner Road, Hubbardston, Ma, MA 01452
+* first name: Lm
 * last name: Llc
-* mailing street: 243 Whitney St
-* mailing city: Leominster
+* mailing street: 205 Gardner Rd
+* mailing city: Hubbardston
 * mailing state: MA
-* mailing zip: 01453
-* list date: 07-13-2025
-* list price: 654000
-* days on market: 31
-* lead date: 06-13-2025
-* status date: 08-13-2025
-* listing agent: Kendra Dickinson
-* listing broker: Keller Williams Realty North Central
-* mls/fsbo id: 73403688
-* bedrooms: 5
+* mailing zip: 01452
+* list date: 06-19-2025
+* list price: 389900
+* days on market: 62
+* lead date: 06-20-2025
+* expired date: 08-20-2025
+* status date: 08-20-2025
+* listing agent: Timothy S. Damon
+* listing broker: Mercury Real Estate
+* mls/fsbo id: 73394178
+* bedrooms: 4
 * bathrooms: 2
 * type: SF
-* year built: 1890
-* lot size: 0.41
-* remarks: Location, location, location! This well-maintained home offers excellent commuter access to Rt2, 495, 190 & 117. Located in the sought-after Nashoba School District, with a brand-new high school under construction. It is also a perfect set up for a multi-generational living situation. The main living area features an sunny, updated kitchen and bathroom, refinished hardwood floors, and a sizable third bedroom on the upper level. The first-floor living space includes two bedrooms, one bath, and a bonus room perfect for a home office or potential laundry. Gas heat & hot water, town water and sewer, and a clean basement for added storage and convenience. Enjoy off-street parking and an easy-to-maintain yard. Freshly painted inside and out. This property is also surrounded by walking/hiking trails, conservation land, the International golf course, lovely main st in Clinton with restaurants, ice cream shops and more.  Come and check it out before it's gone!
-* agent remarks: Buyer and buyers agent to due their due diligence.  Recent rents below market due to 10+ year tenants. Offers should be emailed in 1 PDF to Kendrad@kw.com.  Please so not send via Dotloop or Docusign. Seller is offering $1,000 closing credit for buyers first year of flood insurance as a gift. Quick closing possible.  Also listed as a mulit-family under MLS# 73390446
-* area: South Lancaster
-* phone counter: 0
-* email counter: 0
-* mail counter: 0
-* house number: 136
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73403688&o=&n=0
-* tax id: LANCM0370B0000L00850",VortexSync
-Michael,Brennan,New Lead,Seller,yes,yes,yes,,5083312129,176 Blossom St. U:1,"Fitchburg, Ma",MA,01420,"[Vortex Source: Daily Expireds]
-
-* vortex id: 68946e0cfed18486ce3eacc9
-* lead status: New
-* listing status: Cancelled
-* property address: 176 Blossom St. U:1
-* property city: Fitchburg, Ma
-* property state: MA
-* property zip: 01420
-* name: Michael Brennan
-* mls name: Michael Brennan
-* phone: 508-331-2129
-* phone status: DNC
-* phone 2: 508-344-3012
-* phone 2 status: DNC
-* phone 3: 978-342-3243
-* phone 3 status: DNC
-* phone 4: 617-671-4678
-* phone 5: 978-342-5797
-* phone 5 status: DNC
-* address: 176 Blossom St. U:1, Fitchburg, Ma, MA 01420
-* first name: Michael
-* last name: Brennan
-* mailing street: 131 Flat Rock Rd
-* mailing city: Fitchburg
-* mailing state: MA
-* mailing zip: 01420
-* list date: 08-05-2025
-* list price: 2400
-* days on market: 8
-* lead date: 08-07-2025
-* status date: 08-13-2025
-* listing agent: Michael Leger
-* listing broker: Keller Williams Realty North Central
-* mls/fsbo id: 73413636
-* bedrooms: 3
-* bathrooms: 1
-* type: RN
 * year built: 1900
-* remarks: Spacious and fully remodeled 3-bedroom apartment in the heart of Fitchburg! This bright and modern unit offers generous living space, including a bonus room perfect for a home office, guest room, or creative space. Enjoy the convenience of in-unit laundry (machines included), along with four off-street parking spots?a rare find! With updated finishes throughout, this unit blends comfort and style. Excellent location with easy access to downtown Fitchburg, the MBTA train station, and Fitchburg State University. Don?t miss this opportunity to live in a beautifully renovated unit close to it all!
-* agent remarks: Rental application and credit/background check are to be submitted by each adult applicant via the Zillow application portal, fee of $35 to Zillow applies. Please attach in the Zillow application proof of income and a copy of photo ID for each adult applicant along with the photo ID.
-* area: Fitchburg
+* lot size: 1.84
+* remarks: SUPERB LOCATION on this Dormered Cape style home with 3-4 bedrooms and 1.5 bathrooms.  Many renovations including flooring, paint and some elaborate outside stone walkways.   There is an updated Kitchen with stainless steel appliances, a center island workspace and ample recessed lighting.   In addition to the Kitchen, the first floor features a living room, dining room and a fourth room that could work as an office or 1st floor bedroom.    The lot is very private due to its elevation above the road.  It is very large and level with impressive front and back yards with a sizable deck overlooking the back of the property.    There is an oversized detached 1-car garage and enormous amount of parking.   A new septic system was just installed this year!  Located just FIVE MINUTES from Route 2, makes this a great location for eastbound commuters or those headed to Worcester.  SELLER WILL RE-PAINT to colors of Buyers choosing.  Come take look!!
+* agent remarks: New septic system is a three bedroom design.     Seller has never occupied property.   SELLER WILL RE-PAINT to colors of Buyers choosing.  DO NOT LOCK DEADBOLT ON BACK DOOR!!!
+* house number: 205
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73394178&o=&n=0
+* tax id: HUBBM0003L0063",VortexSync
+Benjamin,Olson,New Lead,Seller,yes,yes,yes,,6039247511,175 Petersham Road,"Phillipston, Ma",MA,01331,"[Vortex Source: Daily Expireds]
+
+* vortex id: 67234a196810c6940f5b284b
+* lead status: New
+* listing status: Cancelled
+* property address: 175 Petersham Road
+* property city: Phillipston, Ma
+* property state: MA
+* property zip: 01331
+* name: Benjamin Olson
+* name 2: Benjamin E Olson Ret
+* mls name: James G Keating
+* mls name 2: Sheri M Keating
+* phone: 603-924-7511
+* phone status: DNC
+* address: 175 Petersham Rd, Phillipston, Ma, MA 01331
+* address 2: 175 Petersham Road, Phillipston, Ma, MA 01331
+* first name: Benjamin
+* last name: Olson
+* mailing street: 175 Petersham Rd
+* mailing city: Phillipston
+* mailing state: MA
+* mailing zip: 01331
+* list date: 06-30-2025
+* list price: 425000
+* days on market: 3
+* lead date: 10-31-2024
+* withdrawn date: 07-03-2025
+* status date: 07-03-2025
+* listing agent: Cory Gracie
+* listing broker: LAER Realty Partners
+* mls/fsbo id: 73398336
+* bedrooms: 4
+* bathrooms: 2
+* type: SF
+* year built: 1939
+* lot size: 12.00
+* remarks: Discover the charm of country living in this 4-bedroom, 1.5-bath Cape set on  approximately 12 beautiful acres. The spacious eat-in kitchen with a wood stove offers cozy winter warmth. The flexible layout includes both a living and a separate family room?ideal for entertaining or relaxing. The split-level family room creates distinct area, perfect for multiple uses. Choose your primary bedroom on the first or second floor. All the bedrooms are a comfortable size. Recent updates include LVP flooring, some replacement windows, newer roof, septic, updated electrical, and a brand-new heating system. With a mix of cleared and wooded land, there?s room for animals, gardens, trails, or future outbuildings. A great option for homesteaders, hobby farmers, or anyone seeking space and serenity. Minutes to Route 2A.
+* agent remarks: Property will convey with a new furnace.
 * phone counter: 0
 * email counter: 0
 * mail counter: 0
-* house number: 176
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73413636&o=&n=0
-* tax id: FITCM0031B0121L0",VortexSync
-Ronald,Anger,New Lead,Seller,yes,yes,yes,,5088264413,27 Southwick Rd,"Sutton, Ma",MA,01590,"[Vortex Source: Daily Expireds]
+* house number: 175
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73398336&o=&n=0
+* tax id: PHILM00020L00003",VortexSync
+David,Thakar,New Lead,Seller,yes,yes,yes,,5085291956,6 Wood St,"Upton, Ma",MA,01568,"[Vortex Source: Daily Expireds]
 
-* vortex id: 68400da3ea6876644b2185ff
+* vortex id: 683190f5fc5cbbc566f1521c
 * lead status: New
-* listing status: Cancelled
-* property address: 27 Southwick Rd
-* property city: Sutton, Ma
+* listing status: Expired
+* property address: 6 Wood St
+* property city: Upton, Ma
 * property state: MA
-* property zip: 01590
-* name: Ronald Anger
-* mls name: Ronald P Anger
-* phone: 508-826-4413
+* property zip: 01568
+* name: David Thakar
+* name 2: Jane Rizzitano
+* mls name: Jane E Rizzitano
+* mls name 2: David Thakar
+* phone: 508-529-1956
 * phone status: DNC
-* phone 2: 508-865-3338
+* phone 2: 508-868-0769
 * phone 2 status: DNC
-* phone 3: 508-353-1652
-* phone 3 status: DNC
-* phone 4: 508-865-1880
-* phone 4 status: DNC
-* address: 27 Southwick Rd, Sutton, Ma, MA 01590
-* first name: Ronald
-* last name: Anger
-* mailing street: 43 Southwick Rd
-* mailing city: Sutton
+* phone 3: 508-439-0942
+* address: 6 Wood St, Upton, Ma, MA 01568
+* first name: David
+* last name: Thakar
+* mailing street: 6 Wood St
+* mailing city: Upton
 * mailing state: MA
-* mailing zip: 01590
-* list date: 06-03-2025
-* list price: 1199999
-* days on market: 13
-* lead date: 06-04-2025
-* status date: 06-20-2025
-* listing agent: Lisa Y. Shaw
-* listing broker: RE/MAX Executive Realty
-* mls/fsbo id: 73384819
+* mailing zip: 01568
+* list date: 05-19-2025
+* list price: 1130000
+* days on market: 93
+* lead date: 05-24-2025
+* expired date: 08-20-2025
+* status date: 08-20-2025
+* listing agent: Kerry Parker
+* listing broker: Equine Homes Real Estate, LLC
+* mls/fsbo id: 73377294
 * bedrooms: 4
 * bathrooms: 3
 * type: SF
-* year built: 1999
-* lot size: 12.53
-* remarks: Welcome to 27 Southwick Rd?a private,custom-built retreat set on 12.53 south-facing acres in a prime central location.Partly zoned 61A for significant tax savings, this property offers exceptional outdoor living,energy efficiency & a thoughtful design.4 spacious bedrooms,2.5 baths & hardwood floors throughout. The chef?s kitchen boasts custom maple cabinetry, granite countertops & SS appliances, flowing into open-concept living spaces w/ 9? ceilings & a cathedral family room w/ custom stone FP.Enjoy your own outdoor oasis w/ a 20x40 saltwater in-ground pool & oversized pool house complete w/ loft, garage door, bar setup & shaded overhang.The grounds are professionally landscaped w/ low-voltage lighting, a pergola wrapped in mature wisteria, & a spring-fed pond?perfect for animals or peaceful reflection. Owned solar panels cover all electricity needs (w/credits left over!) A 500-gal propane tank fuels the range, FP, grill & whole house generator.Sustainability & privacy inside & out!
-* agent remarks: Please submit any and all offers to lisasells@remaxexec.com by 4pm Wednesday 6/11, seller makes no representation as to future use of land, buyer to do their own due diligence
+* year built: 2003
+* lot size: 2.88
+* remarks: Rhapsody Hill Farm offers the perfect blend of family living and equestrian lifestyle. With an established and active lesson program it offers a rare turnkey opportunity for horse lovers. This 4-bed, 2.5-bath home on 2.88 acres is beautifully updated and thoughtfully designed for both comfortable living and hands-on horse care. The home features a spacious family room, formal dining & a chef?s kitchen with quartz counters, custom cabinetry, premium appliances & a cozy dining nook. A first-floor flex room works perfectly as an office or study. Enjoy peaceful mornings on the front porch or entertain on the rear deck. Equestrian amenities include a 5-stall barn w/ 12x12 stalls, tack/grain room, hay loft, solar panels, 4 small paddocks, 1 large paddock, a riding field, 50? round pen, 90x110 sand ring, and a separate 2-stall shed. Whether you're an amateur rider, professional trainer, or simply want to bring your horses home, this property offers function, charm, and potential all in one.
+* agent remarks: Broker nor agent makes any representations or warranties. Buyer/buyer agent to perform their own due diligence. Do not enter property without a confirmed appointment.Subject to sellers finding suitable housing.
 * phone counter: 0
 * email counter: 0
 * mail counter: 0
-* house number: 27
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73384819&o=&n=0
-* tax id: SUTTM0031P34",VortexSync
-Owner,,New Lead,Seller,yes,yes,yes,,5086785908,255 Columbia Street U:2,"Fall River, Ma",MA,02721,"[Vortex Source: Daily Expireds]
+* house number: 6
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73377294&o=&n=0
+* tax id: UPTOM021L10502",VortexSync
+Kenneth,En,New Lead,Seller,yes,yes,yes,,9786541772,117 Clinton Street,"Shrewsbury, Ma",MA,01545,"[Vortex Source: Daily Expireds]
 
-* vortex id: 55241deb9d99e81d2d806d8c
-* lead status: InProgress
-* listing status: Expired
-* property address: 255 Columbia Street U:2
-* property city: Fall River, Ma
-* property state: MA
-* property zip: 02721
-* name: Owner
-* phone: 508-678-5908
-* address: 255 Columbia St # 2, Fall River, Ma, MA 02721
-* address 2: 255 Columbia St U: # 2, Fall River, Ma, MA 02721
-* address 3: 255 Columbia Street U:2, Fall River, Ma, MA 02721
-* first name: Owner
-* mailing street: 255 Columbia St # 2
-* mailing city: Fall River
-* mailing state: MA
-* mailing zip: 2721
-* list date: 05-24-2025
-* list price: 2600
-* days on market: 81
-* lead date: 04-07-2015
-* expired date: 08-13-2025
-* status date: 08-13-2025
-* listing agent: Valena Lugay
-* listing broker: Conway - Dorchester
-* mls/fsbo id: 73379652
-* bedrooms: 3
-* bathrooms: 1
-* type: RN
-* square footage: 600
-* year built: 1900
-* remarks: 255 Columbia Street is a FURNISHED 3 Bed 1 Bath SHORT TERM apartment rental, offering comfort and convenience in the heart of Fall River. This space is bright and inviting featuring hardwood floors with unique inlay detailing. The eat in kitchen contains full sized appliances. Each bedroom offers generous space and ample closets. This unit blends practicality with character. Coin-op Laundry in Building. Conveniently located near shops, dining, house of worship and major highways. Gas Heat. Parking and Storage options available for an additional fee per month, inquire with list agent. Tenant is responsible for maintaining clear and safe stairs and walkway. WIFI and ALL UTILITIES INCLUDED in rental amount! Bedroom 1 has a queen sized bed & dressing table. Bedroom 2 has a queen sized bed & dressing table. Bedroom 3 has a queen sized bed and work desk. Living Room has a large flat screen tv and couch. The kitchen has a glass table with 4 chairs and includes kitchenware & a coffee maker.
-* agent remarks: Tenant is responsible for maintaining clear and safe stairs and walkway. Access to unit only. No other access to property.All furniture included in lease is to remain in the unit upon lease end.
-* phone counter: 1
-* email counter: 0
-* mail counter: 5
-* house number: 255
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=71799423&o=&n=0
-* agent phone: 5086751632",VortexSync
-Owner,,New Lead,Seller,yes,yes,yes,,8573129983,148 Homer Street,"Somerset, Ma",MA,02725,"[Vortex Source: Daily Expireds]
-
-* vortex id: 687a0fb642bbf5efb5559170
+* vortex id: 65e04c5c392a857c36902eb8
 * lead status: New
 * listing status: Expired
-* property address: 148 Homer Street
-* property city: Somerset, Ma
+* property address: 117 Clinton Street
+* property city: Shrewsbury, Ma
 * property state: MA
-* property zip: 02725
-* name: Owner
-* phone: 857-312-9983
-* phone 2: 508-208-9787
-* phone 2 status: DNC
-* phone 3: 508-642-1592
-* phone 3 status: DNC
-* phone 4: 508-324-5364
-* phone 4 status: DNC
-* phone 5: 508-673-5391
-* phone 5 status: DNC
-* address: 148 Homer Street, Somerset, Ma, MA 02725
-* first name: Owner
-* mailing street: 148 Homer St
-* mailing city: Somerset
+* property zip: 01545
+* name: Kenneth En
+* mls name: Emad R Benyamin
+* phone: 978-654-1772
+* phone 2: 978-275-4225
+* phone 3: 978-421-6280
+* phone 4: 508-719-8980
+* address: 117 Clinton St, Shrewsbury, Ma, MA 01545
+* address 2: 117 Clinton St, Shrewsbury, Ma, MA 01545
+* address 3: 117 Clinton Street, Shrewsbury, Ma, MA 01545
+* first name: Kenneth
+* last name: En
+* mailing street: 129 Dingwell St
+* mailing city: Lowell
 * mailing state: MA
-* mailing zip: 2725
-* list date: 07-17-2025
-* list price: 580000
-* days on market: 11
-* lead date: 07-18-2025
-* expired date: 08-13-2025
-* withdrawn date: 07-28-2025
-* status date: 08-13-2025
-* listing agent: Antoinette Falzone
-* listing broker: Cali Realty Group, Inc.
-* mls/fsbo id: 73406060
+* mailing zip: 01851
+* list date: 03-21-2025
+* list price: 180000
+* days on market: 152
+* lead date: 02-29-2024
+* expired date: 08-20-2025
+* status date: 08-20-2025
+* listing agent: Team Lillian Montalto
+* listing broker: Lillian Montalto Signature Properties
+* mls/fsbo id: 73348538
+* type: BU
+* year built: 1935
+* lot size: 0.40
+* remarks: Business For Sale! Well Established Food Service Business.
+* agent remarks: Contact List Agent for Non Disclosure Agreement. Agent must accompany buyers for all property visits. Send all offers to JGordon@AndoverHomes.com. Seller has the right to accept an offer at any time. Do not send offers via Dotloop or DocuSign; Send all documents in 1 PDF. No Love Letters to Sellers. Call List Agent for Seller Concession.
+* phone counter: 0
+* email counter: 0
+* mail counter: 0
+* house number: 117
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73348538&o=&n=0
+* tax id: SHREM07B019000",VortexSync
+Roger,Craveiro,New Lead,Seller,yes,yes,yes,,5086368798,20 Pratt Ave,"Westport, Ma",MA,02790,"[Vortex Source: Daily Expireds]
+
+* vortex id: 66e2b0e830d1f148288d1950
+* lead status: New
+* listing status: Expired
+* property address: 20 Pratt Ave
+* property city: Westport, Ma
+* property state: MA
+* property zip: 02790
+* name: Roger Craveiro
+* mls name: Roger a Craveiro
+* phone: 508-636-8798
+* phone status: DNC
+* phone 2: 508-994-7089
+* phone 3: 508-235-2514
+* phone 4: 508-971-7221
+* phone 4 status: DNC
+* address: 20 Pratt Ave, Westport, Ma, MA 02790
+* first name: Roger
+* last name: Craveiro
+* mailing street: 20 Pratt Ave
+* mailing city: Westport
+* mailing state: MA
+* mailing zip: 02790
+* list date: 09-11-2024
+* list price: 640000
+* days on market: 59
+* lead date: 09-12-2024
+* expired date: 08-20-2025
+* withdrawn date: 11-13-2024
+* status date: 08-20-2025
+* listing agent: Cory DaSilva
+* listing broker: revolv Real Estate
+* mls/fsbo id: 73288746
 * bedrooms: 3
-* bathrooms: 2
+* bathrooms: 1
 * type: SF
 * year built: 1973
-* lot size: 0.23
-* remarks: Spacious, charming home for sale on a peaceful cul-de-sac. Three bedrooms, two full bathrooms, dining room, living room, and kitchen. New kitchen appliances and a large screen porch at the back of the home, with beautiful views of the Taunton River. Homes by the water are pretty desirable and tend to hold their value better than homes further inland. Waterviews can create a sense of calm, and solace in nature becomes a part of your daily life, enhancing the overall quality of life. Opportunities for fishing, boating, and appreciating nature are just minutes away at Mallard Point, Pierce Beach, located near this property. Somerset is a unique blend of contemporary and historical charm. Continually evolving as a vibrant community that values its past while looking toward the future. There is much to love about this house and Somerset. Motivated sellers.Open House: Saturday,  July 26, 11:00 am--12:30 pmSunday, August 3,  11:00 am-- 12:30 pm
-* agent remarks: Subject to seller purchasing a property which is already under agreement.
+* lot size: 0.95
+* remarks: This charming 3-bedroom, 1-bathroom home sits on just under an acre and boasts an in-ground pool, a sunroom with skylights, and a spacious yard. Inside, the partially finished basement offers extra living space, while outside, the large barn and 3-car garage provide plenty of storage and parking. Seller will install a brand new septic system prior to closing. With ample driveway space and a perfect blend of indoor and outdoor living, this home is a must-see!
+* agent remarks: Please read attached offer instructions BEFORE submitting any offers. All offers to be submitted via OFFERSUBMISSIONS.COM  . Information is deemed reliable but not independently verified. Buyers advised to perform due diligence if needed.
 * phone counter: 0
 * email counter: 0
 * mail counter: 0
-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73406060&o=&n=0",VortexSync
+* house number: 20
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73288746&o=&n=0
+* tax id: WPORM53L25N",VortexSync
+Heavenly,Hm Solutions Llc,New Lead,Seller,yes,yes,yes,,5089436504,7 Kennedy Dr,"Dudley, Ma",MA,01571,"[Vortex Source: Daily Expireds]
+
+* vortex id: 684a99c0125e0a829b3d181a
+* lead status: New
+* listing status: Cancelled
+* property address: 7 Kennedy Dr
+* property city: Dudley, Ma
+* property state: MA
+* property zip: 01571
+* name: Heavenly Hm Solutions Llc
+* mls name: Marcin Kicilinski
+* mls name 2: Joanna Kicilinski
+* phone: 508-943-6504
+* phone status: DNC
+* phone 2: 508-889-4365
+* address: 7 Kennedy Dr, Dudley, Ma, MA 01571
+* first name: Heavenly
+* last name: Llc
+* mailing street: 7 Kennedy Dr
+* mailing city: Dudley
+* mailing state: MA
+* mailing zip: 01571
+* list date: 06-11-2025
+* list price: 540000
+* days on market: 20
+* lead date: 06-12-2025
+* withdrawn date: 08-16-2025
+* status date: 08-16-2025
+* listing agent: Diane Dabrowski
+* listing broker: Lamacchia Realty, Inc
+* mls/fsbo id: 73388930
+* bedrooms: 3
+* bathrooms: 2
+* type: SF
+* year built: 1968
+* lot size: 0.42
+* remarks: Completely remodeled 3 BR home is ready for immediate occupancy!   Move right in and enjoy your brand new kitchen with all new appliances.  The huge 4 season sunroom off of the kitchen & dining room overlook the level back yard on a quiet, dead-end street.  The sunroom has it's own heating and air conditioning.  The main living area is cooled by central air!   2 finished rooms & storage area with a window in the basement could easily be an in-law type of set up.  Level access to the basement from the one car garage under, just off the roomy driveway.   Quiet cul de sac location is in convenient area near Nichols College, Golf course & Dudley Plaza.  Showings can start right away.  Hopefully this will be the last showing appointment you will have to make!  Don't miss out on this fresh and clean home, ready for a quick closing!            *** Open House on 6/15/25 from 11 AM- 12 pm.***
+* agent remarks: 2 lots being sold together.  Appliances included.  Seller is a Realtor.  Solar panels are paid off, currently out of service. The house will be sold with the solar system in its current condition or the seller can remove it before closing at no cost.  Buyer to conduct all due diligence and verify all uses & zoning.  Please use showing time for all appointments.  Do not give out the lock box code.  You must accompany your buyer at all times.  Please send offers with all documents to DDabrowski@lamacchiarealty.com.  Please text Diane at 508-479-2340 when you send the offer.  Please no home sale contingencies.
+* phone counter: 0
+* email counter: 0
+* mail counter: 0
+* house number: 7
+* subdivision: cul de sac
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73388930&o=&n=0
+* tax id: DUDLM122L072",VortexSync
+Karen,Boucher,New Lead,Seller,yes,yes,yes,,5086959630,5 Park St,"Attleboro, Ma",MA,02703,"[Vortex Source: Daily Expireds]
+
+* vortex id: 67bd88472ee16698f4cf49de
+* lead status: New
+* listing status: Expired
+* property address: 5 Park St
+* property city: Attleboro, Ma
+* property state: MA
+* property zip: 02703
+* name: Karen Boucher
+* name 2: Boucher, Philip A
+* mls name: Boucher, Philip A
+* mls name 2: Karen R Boucher
+* phone: 508-695-9630
+* phone 2: 207-834-6768
+* phone 2 status: DNC
+* phone 3: 207-834-6123
+* phone 3 status: DNC
+* phone 4: 508-252-4740
+* phone 4 status: DNC
+* phone 5: 508-252-4310
+* phone 5 status: DNC
+* address: 5 Park St, Attleboro, Ma, MA 02703
+* first name: Karen
+* last name: Boucher
+* mailing street: 5 Park Ln
+* mailing city: Attleboro Falls
+* mailing state: MA
+* mailing zip: 02763
+* list date: 02-24-2025
+* list price: 19
+* days on market: 88
+* lead date: 02-25-2025
+* expired date: 08-20-2025
+* withdrawn date: 05-23-2025
+* status date: 08-20-2025
+* listing agent: Michael Alves
+* listing broker: HomeSmart Professionals Real Estate
+* mls/fsbo id: 73337690
+* type: CI
+* year built: 1919
+* lot size: 0.15
+* remarks: ~650 sf streel level retail, ~600sf basement Fantastic Street Level Retail. with full length windows and high ceilings and full basement for additional storage.Location: This site is located just steps away from Attleboro Station, Parks, City Parking Lot, which generates a high volume of foot traffic to local businesses in the immediate area. Located at the intersection of Main Street, Park Street and County Street in downtown Attleboro these locations also enjoy fantastic traffic counts. Separate Electric and % of heat. Retail stores and Professional Office spaces available in the Stanford Building conveniently located in down town Attleboro. Retail spaces features full window exposure with signage in a high vehicle and pedestrian foot traffic count at the intersection of Route 152 (Main St), Route 118 (Park St) and Route 123 (County St).
+* phone counter: 0
+* email counter: 0
+* mail counter: 0
+* house number: 5
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73337690&o=&n=0
+* tax id: NATTM0016B0122L0000",VortexSync
+David,France,New Lead,Seller,yes,yes,yes,,7813409002,5 Hobart Ln U:5,"Rockland, Ma",MA,02370,"[Vortex Source: Daily Expireds]
+
+* vortex id: 686ce00fcde25bf8cf08371e
+* lead status: New
+* listing status: Cancelled
+* property address: 5 Hobart Ln U:5
+* property city: Rockland, Ma
+* property state: MA
+* property zip: 02370
+* name: David France
+* mls name: David H France
+* phone: 781-340-9002
+* address: 5 Hobart Ln U:5, Rockland, Ma, MA 02370
+* first name: David
+* last name: France
+* mailing street: 5 Hobart Ln
+* mailing city: Rockland
+* mailing state: MA
+* mailing zip: 02370
+* list date: 07-07-2025
+* list price: 489000
+* days on market: 28
+* lead date: 07-08-2025
+* withdrawn date: 08-04-2025
+* status date: 08-04-2025
+* listing agent: Anne Galvin
+* listing broker: Coldwell Banker Realty - Dorchester
+* mls/fsbo id: 73400270
+* bedrooms: 2
+* bathrooms: 2
+* type: CC
+* year built: 1988
+* lot size: 20.88
+* remarks: Beautifully Updated 2BR/2.5BA Townhouse in Cullivan Farm. Welcome to this remodeled townhouse-style condo in the sought-after Cullivan Farm community.This 2-bedroom, 2-bath unit features a modern kitchen with generous cabinet space and impeccably maintained appliances, plus updated primary bathroom.The open-concept living and dining area offers great natural light and a comfortable flow for everyday living. Upstairs, both spacious bedrooms feature large closets and private full bathrooms. The primary suite includes a private balcony?perfect for relaxing. Additional highlights include in-unit laundry, central A/C, 2 decks and 1 parking space. Nestled in a quiet, well-maintained community with easy access to shopping, dining, and major routes.Don?t miss this move-in-ready gem!
+* phone counter: 0
+* email counter: 0
+* mail counter: 0
+* house number: 5
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73400270&o=&n=0
+* tax id: ROCKM26B0L1UA5",VortexSync
+Irene,Cotton,New Lead,Seller,yes,yes,yes,,9783655066,11 Lindbergh Street Rear,"Clinton, Ma",MA,01510,"[Vortex Source: Daily Expireds]
+
+* vortex id: 66c45deb0dfab82b94214aed
+* lead status: New
+* listing status: Expired
+* property address: 11 Lindbergh Street Rear
+* property city: Clinton, Ma
+* property state: MA
+* property zip: 01510
+* name: Irene Cotton
+* mls name: Irene Theresa Cotton
+* phone: 978-365-5066
+* phone 2: 978-365-4757
+* phone 2 status: DNC
+* phone 3: 978-368-8742
+* phone 4: 912-598-4099
+* phone 4 status: DNC
+* address: 11 Lindbergh Street Rear, Clinton, Ma, MA 01510
+* first name: Irene
+* last name: Cotton
+* mailing street: 2 High St
+* mailing city: Clinton
+* mailing state: MA
+* mailing zip: 01510
+* list date: 08-19-2024
+* list price: 249900
+* days on market: 267
+* lead date: 08-20-2024
+* expired date: 08-20-2025
+* withdrawn date: 05-13-2025
+* status date: 08-20-2025
+* listing agent: Nancy Moran
+* listing broker: Realty Vision
+* mls/fsbo id: 73279427
+* type: LD
+* lot size: 2.14
+* remarks: Attention Developers!! Great spot for duplexes or condos. Nice dry and level land, some wooded, some cleared. Additional abutting land available.
+* phone counter: 0
+* email counter: 0
+* mail counter: 0
+* house number: 11
+* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73279427&o=&n=0
+* tax id: CLINM0121B1528L0000",VortexSync

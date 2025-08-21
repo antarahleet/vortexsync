@@ -1,0 +1,249 @@
+warning: in the working copy of 'cache/downloads/boldtrail_upload.csv', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'cache/downloads/daily_expireds.csv', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/cache/downloads/boldtrail_upload.csv b/cache/downloads/boldtrail_upload.csv[m
+[1mindex 1a2c8fb..58f3d9f 100644[m
+[1m--- a/cache/downloads/boldtrail_upload.csv[m
+[1m+++ b/cache/downloads/boldtrail_upload.csv[m
+[36m@@ -1,460 +1,400 @@[m
+ first_name,last_name,status,deal_type,email_optin,text_on,phone_on,email,cell_phone_1,primary_address,primary_city,primary_state,primary_zip,agent_notes,source[m
+[31m-Michael,Binda,New Lead,Seller,yes,yes,yes,,7745017083,127 John Scott Boulevard,"Norton, Ma",MA,02766,"[Vortex Source: Daily Expireds][m
+[32m+[m[32mLm,Fast Labor Llc,New Lead,Seller,yes,yes,yes,,9786328870,205 Gardner Road,"Hubbardston, Ma",MA,01452,"[Vortex Source: Daily Expireds][m
+ [m
+[31m-* vortex id: 684a99c5125e0a829b3d187a[m
+[32m+[m[32m* vortex id: 685525ca3acf746e920fc9b2[m
+ * lead status: New[m
+[31m-* listing status: Cancelled[m
+[31m-* property address: 127 John Scott Boulevard[m
+[31m-* property city: Norton, Ma[m
+[32m+[m[32m* listing status: Expired[m
+[32m+[m[32m* property address: 205 Gardner Road[m
+[32m+[m[32m* property city: Hubbardston, Ma[m
+ * property state: MA[m
+[31m-* property zip: 02766[m
+[31m-* name: Michael Binda[m
+[31m-* mls name: Michael L Binda[m
+[31m-* phone: 774-501-7083[m
+[31m-* address: 127 John Scott Boulevard, Norton, Ma, MA 02766[m
+[31m-* first name: Michael[m
+[31m-* last name: Binda[m
+[31m-* mailing street: 1580 Glebe St[m
+[31m-* mailing city: Taunton[m
+[32m+[m[32m* property zip: 01452[m
+[32m+[m[32m* name: Lm Fast Labor Llc[m
+[32m+[m[32m* mls name: Lm Fast Labor Llc[m
+[32m+[m[32m* phone: 978-632-8870[m
+[32m+[m[32m* phone status: DNC[m
+[32m+[m[32m* address: 205 Gardner Road, Hubbardston, Ma, MA 01452[m
+[32m+[m[32m* first name: Lm[m
+[32m+[m[32m* last name: Llc[m
+[32m+[m[32m* mailing street: 205 Gardner Rd[m
+[32m+[m[32m* mailing city: Hubbardston[m
+ * mailing state: MA[m
+[31m-* mailing zip: 02780[m
+[31m-* list date: 06-11-2025[m
+[31m-* list price: 989000[m
+[31m-* days on market: 63[m
+[31m-* lead date: 06-12-2025[m
+[31m-* status date: 08-13-2025[m
+[31m-* listing agent: Nick Andrews[m
+[31m-* listing broker: Century 21 Realty Network[m
+[31m-* mls/fsbo id: 73389134[m
+[32m+[m[32m* mailing zip: 01452[m
+[32m+[m[32m* list date: 06-19-2025[m
+[32m+[m[32m* list price: 389900[m
+[32m+[m[32m* days on market: 62[m
+[32m+[m[32m* lead date: 06-20-2025[m
+[32m+[m[32m* expired date: 08-20-2025[m
+[32m+[m[32m* status date: 08-20-2025[m
+[32m+[m[32m* listing agent: Timothy S. Damon[m
+[32m+[m[32m* listing broker: Mercury Real Estate[m
+[32m+[m[32m* mls/fsbo id: 73394178[m
+ * bedrooms: 4[m
+[31m-* bathrooms: 3[m
+[32m+[m[32m* bathrooms: 2[m
+ * type: SF[m
+[31m-* year built: 2025[m
+[31m-* lot size: 2.20[m
+[31m-* remarks: Welcome to this exceptional new construction home offering over 3,200sqft of beautifully designed living space! This 4 Bed, 2.5 Bath Colonial style residence blends luxury, efficiency, and convenience in one of the most desirable neighborhoods. The first floor features an open layout with gleaming hardwood and tile flooring, a spacious living room with a fireplace, and a stylish kitchen complete with granite countertops, stainless steel appliances, a kitchen island, pantry closet, and slider to a private back deck. A mudroom, half bath, and oversized 2-car garage complete the main level. Upstairs, the main bedroom offers a luxurious retreat with a private suite bath and walk-in closet. Three additional bedrooms and a full bath provide plenty of space for family or guests. This home is equipped with 400 AMP electrical service, 2 heat pumps, central A/C, a backup generator, irrigation system, and an EV charger. Ideal for commuters being just minutes from rt 123&140.[m
+[31m-* agent remarks: Send all offers to nick@realty-net.com.[m
+[31m-* house number: 127[m
+[31m-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73389134&o=&n=0[m
+[31m-* tax id: NORTM31P3606",VortexSync[m
+[31m-T,Montauk,New Lead,Seller,yes,yes,yes,,8586031440,290 High Street,"Pembroke, Ma",MA,02359,"[Vortex Source: Daily Expireds][m
+[32m+[m[32m* year built: 1900[m
+[32m+[m[32m* lot size: 1.84[m
+[32m+[m[32m* remarks: SUPERB LOCATION on this Dormered Cape style home with 3-4 bedrooms and 1.5 bathrooms.  Many renovations including flooring, paint and some elaborate outside stone walkways.   There is an updated Kitchen with stainless steel appliances, a center island workspace and ample recessed lighting.   In addition to the Kitchen, the first floor features a living room, dining room and a fourth room that could work as an office or 1st floor bedroom.    The lot is very private due to its elevation above the road.  It is very large and level with impressive front and back yards with a sizable deck overlooking the back of the property.    There is an oversized detached 1-car garage and enormous amount of parking.   A new septic system was just installed this year!  Located just FIVE MINUTES from Route 2, makes this a great location for eastbound commuters or those headed to Worcester.  SELLER WILL RE-PAINT to colors of Buyers choosing.  Come take look!![m
+[32m+[m[32m* agent remarks: New septic system is a three bedroom design.     Seller has never occupied property.   SELLER WILL RE-PAINT to colors of Buyers choosing.  DO NOT LOCK DEADBOLT ON BACK DOOR!!![m
+[32m+[m[32m* house number: 205[m
+[32m+[m[32m* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73394178&o=&n=0[m
+[32m+[m[32m* tax id: HUBBM0003L0063",VortexSync[m
+[32m+[m[32mBenjamin,Olson,New Lead,Seller,yes,yes,yes,,6039247511,175 Petersham Road,"Phillipston, Ma",MA,01331,"[Vortex Source: Daily Expireds][m
+ [m
+[31m-* vortex id: 6868eb22ed18e173d689ca62[m
+[32m+[m[32m* vortex id: 67234a196810c6940f5b284b[m
+ * lead status: New[m
+ * listing status: Cancelled[m
+[31m-* property address: 290 High Street[m
+[31m-* property city: Pembroke, Ma[m
+[32m+[m[32m* property address: 175 Petersham Road[m
+[32m+[m[32m* property city: Phillipston, Ma[m
+ * property state: MA[m
+[31m-* property zip: 02359[m
+[31m-* name: T Montauk[m
+[31m-* mls name: T Montauk[m
+[31m-* phone: 858-603-1440[m
+[32m+[m[32m* property zip: 01331[m
+[32m+[m[32m* name: Benjamin Olson[m
+[32m+[m[32m* name 2: Benjamin E Olson Ret[m
+[32m+[m[32m* mls name: James G Keating[m
+[32m+[m[32m* mls name 2: Sheri M Keating[m
+[32m+[m[32m* phone: 603-924-7511[m
+ * phone status: DNC[m
+[31m-* phone 2: 508-399-8517[m
+[31m-* phone 3: 401-390-8740[m
+[31m-* phone 3 status: DNC[m
+[31m-* address: 290 High Street, Pembroke, Ma, MA 02359[m
+[31m-* first name: T[m
+[31m-* last name: Montauk[m
+[31m-* mailing street: 290 High St[m
+[31m-* mailing city: Pembroke[m
+[32m+[m[32m* address: 175 Petersham Rd, Phillipston, Ma, MA 01331[m
+[32m+[m[32m* address 2: 175 Petersham Road, Phillipston, Ma, MA 01331[m
+[32m+[m[32m* first name: Benjamin[m
+[32m+[m[32m* last name: Olson[m
+[32m+[m[32m* mailing street: 175 Petersham Rd[m
+[32m+[m[32m* mailing city: Phillipston[m
+ * mailing state: MA[m
+[31m-* mailing zip: 02359[m
+[31m-* list date: 07-05-2025[m
+[31m-* list price: 639900[m
+[31m-* days on market: 39[m
+[31m-* lead date: 07-05-2025[m
+[31m-* status date: 08-13-2025[m
+[31m-* listing agent: Andrew Hillman[m
+[31m-* listing broker: Hillman Real Estate[m
+[31m-* mls/fsbo id: 73399746[m
+[31m-* bedrooms: 3[m
+[32m+[m[32m* mailing zip: 01331[m
+[32m+[m[32m* list date: 06-30-2025[m
+[32m+[m[32m* list price: 425000[m
+[32m+[m[32m* days on market: 3[m
+[32m+[m[32m* lead date: 10-31-2024[m
+[32m+[m[32m* withdrawn date: 07-03-2025[m
+[32m+[m[32m* status date: 07-03-2025[m
+[32m+[m[32m* listing agent: Cory Gracie[m
+[32m+[m[32m* listing broker: LAER Realty Partners[m
+[32m+[m[32m* mls/fsbo id: 73398336[m
+[32m+[m[32m* bedrooms: 4[m
+ * bathrooms: 2[m
+ * type: SF[m
+[31m-* year built: 1952[m
+[31m-* lot size: 1.00[m
+[31m-* remarks: Beautiful home with many upgrades. Roof replaced in 2018, Windows replaced in 2020, Hardwood floors redone in 2020, Kitchen redone in 2020, Bathrooms renovated in 2024, Family room completely renovated in 2019, EV charging station 2024, generator transfer switch 2019, upgraded wiring 2019. New Septic will installed before closing. Huge fenced in backyard with pool. Subject to the seller finding suitable housing.[m
+[32m+[m[32m* year built: 1939[m
+[32m+[m[32m* lot size: 12.00[m
+[32m+[m[32m* remarks: Discover the charm of country living in this 4-bedroom, 1.5-bath Cape set on  approximately 12 beautiful acres. The spacious eat-in kitchen with a wood stove offers cozy winter warmth. The flexible layout includes both a living and a separate family room?ideal for entertaining or relaxing. The split-level family room creates distinct area, perfect for multiple uses. Choose your primary bedroom on the first or second floor. All the bedrooms are a comfortable size. Recent updates include LVP flooring, some replacement windows, newer roof, septic, updated electrical, and a brand-new heating system. With a mix of cleared and wooded land, there?s room for animals, gardens, trails, or future outbuildings. A great option for homesteaders, hobby farmers, or anyone seeking space and serenity. Minutes to Route 2A.[m
+[32m+[m[32m* agent remarks: Property will convey with a new furnace.[m
+ * phone counter: 0[m
+ * email counter: 0[m
+ * mail counter: 0[m
+[31m-* house number: 290[m
+[31m-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73399746&o=&n=0[m
+[31m-* tax id: PEMBME8P6",VortexSync[m
+[31m-Jason,Gendreauvisco,New Lead,Seller,yes,yes,yes,,5086724842,654 Highland Ave,"Fall River, Ma",MA,02720,"[Vortex Source: Daily Expireds][m
+[32m+[m[32m* house number: 175[m
+[32m+[m[32m* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73398336&o=&n=0[m
+[32m+[m[32m* tax id: PHILM00020L00003",VortexSync[m
+[32m+[m[32mDavid,Thakar,New Lead,Seller,yes,yes,yes,,5085291956,6 Wood St,"Upton, Ma",MA,01568,"[Vortex Source: Daily Expireds][m
+ [m
+[31m-* vortex id: 620530e132ef7b4e5505f118[m
+[32m+[m[32m* vortex id: 683190f5fc5cbbc566f1521c[m
+ * lead status: New[m
+[31m-* listing status: Cancelled[m
+[31m-* property address: 654 Highland Ave[m
+[31m-* property city: Fall River, Ma[m
+[32m+[m[32m* listing status: Expired[m
+[32m+[m[32m* property address: 6 Wood St[m
+[32m+[m[32m* property city: Upton, Ma[m
+ * property state: MA[m
+[31m-* property zip: 02720[m
+[31m-* name: Jason Gendreauvisco[m
+[31m-* name 2: Aaron Gendreauvisco[m
+[31m-* mls name: Louis Mello[m
+[31m-* mls name 2: Fatima Barboza[m
+[31m-* phone: 508-672-4842[m
+[32m+[m[32m* property zip: 01568[m
+[32m+[m[32m* name: David Thakar[m
+[32m+[m[32m* name 2: Jane Rizzitano[m
+[32m+[m[32m* mls name: Jane E Rizzitano[m
+[32m+[m[32m* mls name 2: David Thakar[m
+[32m+[m[32m* phone: 508-529-1956[m
+ * phone status: DNC[m
+[31m-* phone 2: 508-587-6436[m
+[32m+[m[32m* phone 2: 508-868-0769[m
+ * phone 2 status: DNC[m
+[31m-* phone 3: 508-922-6969[m
+[31m-* phone 3 status: DNC[m
+[31m-* address: 654 Highland Ave, Fall River, Ma, MA 02720[m
+[31m-* address 2: 654 Highland Ave, Fall River, Ma, MA 02720[m
+[31m-* first name: Jason[m
+[31m-* last name: Gendreauvisco[m
+[31m-* mailing street: 654 Highland Ave[m
+[31m-* mailing city: Fall River[m
+[32m+[m[32m* phone 3: 508-439-0942[m
+[32m+[m[32m* address: 6 Wood St, Upton, Ma, MA 01568[m
+[32m+[m[32m* first name: David[m
+[32m+[m[32m* last name: Thakar[m
+[32m+[m[32m* mailing street: 6 Wood St[m
+[32m+[m[32m* mailing city: Upton[m
+ * mailing state: MA[m
+[31m-* mailing zip: 02720[m
+[31m-* list date: 04-15-2025[m
+[31m-* list price: 1285000[m
+[31m-* days on market: 120[m
+[31m-* lead date: 02-10-2022[m
+[31m-* expired date: 03-31-2022[m
+[31m-* status date: 08-13-2025[m
+[31m-* listing agent: Jennifer DaPonte[m
+[31m-* listing broker: Berkshire Hathaway HomeServices Robert Paul Properties[m
+[31m-* mls/fsbo id: 73359908[m
+[31m-* bedrooms: 7[m
+[31m-* bathrooms: 4[m
+[32m+[m[32m* mailing zip: 01568[m
+[32m+[m[32m* list date: 05-19-2025[m
+[32m+[m[32m* list price: 1130000[m
+[32m+[m[32m* days on market: 93[m
+[32m+[m[32m* lead date: 05-24-2025[m
+[32m+[m[32m* expired date: 08-20-2025[m
+[32m+[m[32m* status date: 08-20-2025[m
+[32m+[m[32m* listing agent: Kerry Parker[m
+[32m+[m[32m* listing broker: Equine Homes Real Estate, LLC[m
+[32m+[m[32m* mls/fsbo id: 73377294[m
+[32m+[m[32m* bedrooms: 4[m
+[32m+[m[32m* bathrooms: 3[m
+ * type: SF[m
+[31m-* square footage: 7570[m
+[31m-* year built: 1901[m
+[31m-* lot size: 0.37[m
+[31m-* remarks: Built in 1901, the Robert Marshall House is an exquisite Georgian Revival mansion in the heart of the Highlands. This architectural gem showcases timeless elegance with rich oak wainscoting, coffered ceilings, and custom period details throughout. The main level features an updated kitchen with two pantries, a mahogany-wrapped library, formal living and dining rooms, and a graceful music room. Upstairs, the spacious master suite includes a private patio, full bath, and optional sitting room, den or  bedroom, accompanied by three additional bedrooms and another full bath. The third level, originally servant quarters, offers two updated bedrooms with expansion potential. The basement features a 1/2 bath, laundry room, additional kitchen and ample storage.  Outside, enjoy a generous backyard with a pergola, portico, charming stone patio, and a two-car garage.  A rare opportunity to own a piece of Highlands history where architectural beauty and modern comfort come together.[m
+[32m+[m[32m* year built: 2003[m
+[32m+[m[32m* lot size: 2.88[m
+[32m+[m[32m* remarks: Rhapsody Hill Farm offers the perfect blend of family living and equestrian lifestyle. With an established and active lesson program it offers a rare turnkey opportunity for horse lovers. This 4-bed, 2.5-bath home on 2.88 acres is beautifully updated and thoughtfully designed for both comfortable living and hands-on horse care. The home features a spacious family room, formal dining & a chef?s kitchen with quartz counters, custom cabinetry, premium appliances & a cozy dining nook. A first-floor flex room works perfectly as an office or study. Enjoy peaceful mornings on the front porch or entertain on the rear deck. Equestrian amenities include a 5-stall barn w/ 12x12 stalls, tack/grain room, hay loft, solar panels, 4 small paddocks, 1 large paddock, a riding field, 50? round pen, 90x110 sand ring, and a separate 2-stall shed. Whether you're an amateur rider, professional trainer, or simply want to bring your horses home, this property offers function, charm, and potential all in one.[m
+[32m+[m[32m* agent remarks: Broker nor agent makes any representations or warranties. Buyer/buyer agent to perform their own due diligence. Do not enter property without a confirmed appointment.Subject to sellers finding suitable housing.[m
+ * phone counter: 0[m
+ * email counter: 0[m
+ * mail counter: 0[m
+[31m-* house number: 654[m
+[31m-* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73359908&o=&n=0[m
+[31m-* tax id: FALLM0M20B0000L0005[m
+[31m-* agent phone: 5089514957",VortexSync[m
+[31m-Shao,Huang,New Lead,Seller,yes,yes,yes,,7813914318,174 Gilbert St,"Mansfield, MA",MA,02048,"[Vortex Source: Daily Expireds][m
+[32m+[m[32m* house number: 6[m
+[32m+[m[32m* picture url: http://h3s.mlspin.com/photo/photo.aspx?h=200&w=256&mls=73377294&o=&n=0[m
+[32m+[m[32m* tax id: UPTOM021L10502",VortexSync[m
+[32m+[m[32mKenneth,En,New Lead,Seller,yes,yes,yes,,9786541772,117 Clinton Street,"Shrewsbury, Ma",MA,01545,"[Vortex Source: Daily Expireds][m
+ [m
+[31m-* vortex id: 6442af7e6663d755407ea13c[m
+[32m+[m[32m* vortex id: 65e04c5c392a857c36902eb8[m
+ * lead status: New[m
+ * listing status: Expire
